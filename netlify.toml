@@ -1,0 +1,12 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/contact"
+  to = "/#booking"
+  status = 301
+
+[[redirects]]
+  from = "/impressum/"
+  to = "/impressum.html"
+  status = 301
