@@ -53,7 +53,9 @@
       border-bottom: 1px solid var(--line);
     }
     .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-    .brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.02em; text-decoration: none; }
+    .brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.02em; text-decoration: none; display: inline-flex; align-items: center; }
+    .brand-logo { height: 30px; width: auto; display: block; }
+    footer .brand-logo { height: 34px; }
     .nav-links { display: flex; gap: 28px; align-items: center; }
     .nav-links a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--muted); transition: color .15s; }
     .nav-links a:hover { color: var(--ink); }
@@ -169,7 +171,7 @@
 <body>
   <header>
     <div class="wrap nav">
-      <a href="#top" class="brand">VAYNEX</a>
+      <a href="#top" class="brand" aria-label="Vaynex"><img class="brand-logo" src="logo.png" alt="Vaynex" /></a>
       <nav class="nav-links" id="navlinks">
         <a href="#music">Music</a>
         <a href="#about">About</a>
@@ -320,7 +322,7 @@
 
   <footer>
     <div class="wrap foot">
-      <a href="#top" class="brand">VAYNEX</a>
+      <a href="#top" class="brand" aria-label="Vaynex"><img class="brand-logo" src="logo.png" alt="Vaynex" /></a>
       <div class="foot-links">
         <a href="#music">Music</a>
         <a href="#about">About</a>
