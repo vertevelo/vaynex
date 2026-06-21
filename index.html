@@ -124,6 +124,17 @@
     .hp { position:absolute; left:-5000px; }
     .form-note { font-size:13px; color:var(--muted); }
 
+    /* Testimonial */
+    .testi-wrap { max-width:760px; margin:0 auto; text-align:center; }
+    .testi-stars { color:var(--accent); letter-spacing:4px; font-size:18px; margin-bottom:22px; }
+    .testi-quote { font-family:'Space Grotesk',sans-serif; font-size:clamp(20px,2.8vw,28px); line-height:1.45; letter-spacing:-0.01em; color:var(--ink); }
+    .testi-quote b { font-weight:700; }
+    .testi-author { display:flex; align-items:center; justify-content:center; gap:14px; margin-top:30px; }
+    .testi-avatar { width:48px; height:48px; border-radius:999px; background:var(--ink); color:var(--bg); display:flex; align-items:center; justify-content:center; font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:16px; letter-spacing:0.04em; flex:none; }
+    .testi-name { text-align:left; }
+    .testi-name strong { font-family:'Space Grotesk',sans-serif; font-size:16px; display:block; }
+    .testi-name span { font-size:13px; color:var(--muted); }
+
     /* Footer */
     footer { border-top:1px solid var(--line); padding:48px 0; }
     .foot { display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; align-items:center; }
@@ -216,8 +227,21 @@
       </div>
     </section>
 
+    <!-- TESTIMONIAL -->
+    <section id="testimonial" class="alt">
+      <div class="wrap testi-wrap">
+        <div class="section-label">Testimonial</div>
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">Working with Vaynex is always inspiring. His <b>raw boom bap</b> sound is both <b>gritty</b> and <b>atmospheric</b>, and he's incredibly <b>prolific</b>, <b>responsive</b>, and <b>easy to work</b> with. His beats create the kind of mood that <b>instantly makes you want to start writing.</b></p>
+        <div class="testi-author">
+          <span class="testi-avatar">AS</span>
+          <span class="testi-name"><strong>Ari Selva</strong><span>Recording Artist</span></span>
+        </div>
+      </div>
+    </section>
+
     <!-- BOOKING -->
-    <section id="booking" class="alt">
+    <section id="booking">
       <div class="wrap book-grid">
         <div>
           <div class="section-label">Get in touch</div>
