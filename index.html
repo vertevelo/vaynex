@@ -20,6 +20,10 @@
   <meta name="twitter:title" content="Vaynex" />
   <meta name="twitter:description" content="Vaynex. Uncompromising Boom-Bap Beats." />
 
+  <link rel="alternate" hreflang="en" href="https://www.vaynex.ch/" />
+  <link rel="alternate" hreflang="de" href="https://www.vaynex.ch/de/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.vaynex.ch/" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -72,6 +76,18 @@
     .nav-social svg { width: 20px; height: 20px; fill: var(--muted); transition: fill .15s; }
     .nav-social:hover svg { fill: var(--ink); }
     .menu-btn { display: none; background: none; border: 0; font-size: 22px; cursor: pointer; }
+
+    /* Language switcher */
+    .lang { position: relative; display: inline-flex; align-items: center; }
+    .lang-btn { display: inline-flex; align-items: center; gap: 6px; background: none; border: 0; cursor: pointer; color: var(--muted); font-family: inherit; font-size: 14px; font-weight: 500; padding: 0; transition: color .15s; }
+    .lang-btn:hover { color: var(--ink); }
+    .lang-btn svg { width: 18px; height: 18px; fill: currentColor; }
+    .lang-btn .caret { font-size: 10px; }
+    .lang-menu { position: absolute; top: calc(100% + 10px); right: 0; background: #fff; border: 1px solid var(--line); border-radius: 8px; padding: 6px; min-width: 130px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); display: none; z-index: 60; }
+    .lang-menu.open { display: block; }
+    .lang-menu a { display: block; padding: 8px 12px; border-radius: 6px; font-size: 14px; color: var(--ink); text-decoration: none; }
+    .lang-menu a:hover { background: var(--bg-alt); }
+    .lang-menu a.active { font-weight: 600; color: var(--accent); }
 
     /* Hero */
     .hero { padding: 72px 0 64px; }
@@ -190,6 +206,16 @@
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.2v12.93a2.59 2.59 0 1 1-2.59-2.59c.27 0 .53.04.78.12V10.2a5.86 5.86 0 0 0-.78-.05A5.79 5.79 0 1 0 15.34 16V9.4a7.5 7.5 0 0 0 4.4 1.4V7.6a4.28 4.28 0 0 1-3.14-1.78z"/></svg>
         </a>
         <a href="https://vaynex.gumroad.com" target="_blank" rel="noopener" class="nav-cta">🎧 Beats</a>
+        <div class="lang">
+          <button class="lang-btn" id="langBtn" aria-label="Language" aria-haspopup="true" aria-expanded="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.93 6h-2.95a15.7 15.7 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.93 8zM12 4c.83 1.2 1.48 2.53 1.91 4h-3.82c.43-1.47 1.08-2.8 1.91-4zM4.26 14a7.96 7.96 0 0 1 0-4h3.38a16.6 16.6 0 0 0 0 4H4.26zm.81 2h2.95c.32 1.25.78 2.45 1.38 3.56A8.03 8.03 0 0 1 5.07 16zm2.95-8H5.07a8.03 8.03 0 0 1 4.33-3.56A15.7 15.7 0 0 0 8.02 8zM12 20c-.83-1.2-1.48-2.53-1.91-4h3.82A13.6 13.6 0 0 1 12 20zm2.34-6H9.66a14.4 14.4 0 0 1 0-4h4.68a14.4 14.4 0 0 1 0 4zm.27 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56zM16.36 14a16.6 16.6 0 0 0 0-4h3.38a7.96 7.96 0 0 1 0 4h-3.38z"/></svg>
+            <span>EN</span><span class="caret">▾</span>
+          </button>
+          <div class="lang-menu" id="langMenu" role="menu">
+            <a href="/" class="active">English</a>
+            <a href="/de/">Deutsch</a>
+          </div>
+        </div>
       </nav>
       <button class="menu-btn" id="menuBtn" aria-label="Menu">☰</button>
     </div>
@@ -361,6 +387,14 @@
     links.querySelectorAll('a').forEach(function (a) {
       a.addEventListener('click', function () { links.classList.remove('open'); });
     });
+    var langBtn = document.getElementById('langBtn');
+    var langMenu = document.getElementById('langMenu');
+    langBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = langMenu.classList.toggle('open');
+      langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', function () { langMenu.classList.remove('open'); langBtn.setAttribute('aria-expanded','false'); });
   </script>
 </body>
 </html>
