@@ -185,6 +185,11 @@
     .about-grid p { font-size: 17px; color: #33332c; margin-top: 18px; }
     .about-grid p + p { margin-top: 14px; }
 
+    /* Studio gallery */
+    .gallery-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:32px; }
+    .gallery-grid img { width:100%; aspect-ratio:3/2; object-fit:cover; border-radius:8px; filter:grayscale(6%); }
+    @media (max-width:860px) { .gallery-grid { grid-template-columns:repeat(2,1fr); } }
+
     /* Voices */
     .voices-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; margin-top:28px; }
     .voice-card { background:#fff; border:1px solid var(--line); border-radius:14px; padding:26px; text-align:left; }
@@ -476,6 +481,20 @@
           <p>Vaynex is a boom-bap producer from Switzerland with one rule: no compromises. The sound is built on dusty drums, hand-picked samples and the raw, head-nodding energy that defined the golden era of hip-hop.</p>
           <p>After a deliberate restart as a beatmaker, focused on analog over algorithm and craft over shortcuts, Vaynex keeps releasing beats and collaborations for independent artists who want substance, not filler. Alongside Boom-Bap, a darker Cinematic Trap side exists for rappers who need to let something out rather than sort it out.</p>
           <p>Open for collabs, custom beats and features. If you rap with intent, we'll get along.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STUDIO / B-ROLL -->
+    <section id="studio">
+      <div class="wrap">
+        <div class="section-label">Behind the beats</div>
+        <h2 class="section-title">In the studio.</h2>
+        <div class="gallery-grid">
+          <img src="images/broll-1.jpg" alt="Vaynex in the studio" />
+          <img src="images/broll-2.jpg" alt="Vaynex working on a beat in Logic Pro" />
+          <img src="images/broll-3.jpg" alt="Vaynex programming drums on the Maschine controller" />
+          <img src="images/broll-4.jpg" alt="Vaynex finger drumming on the Maschine pads" />
         </div>
       </div>
     </section>

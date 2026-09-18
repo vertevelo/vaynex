@@ -185,6 +185,11 @@
     .about-grid p { font-size: 17px; color: #33332c; margin-top: 18px; }
     .about-grid p + p { margin-top: 14px; }
 
+    /* Studio gallery */
+    .gallery-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:32px; }
+    .gallery-grid img { width:100%; aspect-ratio:3/2; object-fit:cover; border-radius:8px; filter:grayscale(6%); }
+    @media (max-width:860px) { .gallery-grid { grid-template-columns:repeat(2,1fr); } }
+
     /* Voices */
     .voices-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; margin-top:28px; }
     .voice-card { background:#fff; border:1px solid var(--line); border-radius:14px; padding:26px; text-align:left; }
@@ -476,6 +481,20 @@
           <p>Vaynex ist ein Boom-Bap-Producer aus der Schweiz mit einer einzigen Regel: keine Kompromisse. Der Sound basiert auf staubigen Drums, handverlesenen Samples und der rohen, kopfnickenden Energie, die die goldene Ära des Hip-Hop geprägt hat.</p>
           <p>Nach einem bewussten Neustart als Beatmaker, analog statt Algorithmus und Handwerk statt Abkürzungen, veröffentlicht Vaynex weiterhin Beats und Kollaborationen für unabhängige Artists, die Substanz wollen, keine Füllware. Neben Boom-Bap gibt es eine dunklere Cinematic-Trap-Seite, für Rapper, die etwas rauslassen statt sortieren müssen.</p>
           <p>Offen für Collabs, Custom Beats und Features. Wer mit Haltung rappt, mit dem verstehen wir uns.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- STUDIO / B-ROLL -->
+    <section id="studio">
+      <div class="wrap">
+        <div class="section-label">Hinter den Beats</div>
+        <h2 class="section-title">Im Studio.</h2>
+        <div class="gallery-grid">
+          <img src="../images/broll-1.jpg" alt="Vaynex im Studio" />
+          <img src="../images/broll-2.jpg" alt="Vaynex arbeitet an einem Beat in Logic Pro" />
+          <img src="../images/broll-3.jpg" alt="Vaynex programmiert Drums auf dem Maschine-Controller" />
+          <img src="../images/broll-4.jpg" alt="Vaynex beim Finger Drumming auf den Maschine-Pads" />
         </div>
       </div>
     </section>
