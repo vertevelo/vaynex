@@ -7,7 +7,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vaynex · Kompromisslose Boom-Bap Beats</title>
-  <meta name="description" content="Vaynex. Kompromisslose Boom-Bap Beats. Producer & Beatmaker aus der Schweiz. Beats, Releases und Booking." />
+  <meta name="description" content="Vaynex. Kompromisslose Boom-Bap Beats. Producer und Beatmaker aus der Schweiz. Song-Packages, Beats, Releases und Booking." />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -26,7 +26,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
     :root {
@@ -36,18 +36,19 @@
       --muted: #747272;
       --line: #d8d6c8;
       --accent: #8f2726;
+      --accent2: #355e3b;
       --maxw: 1120px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', system-ui, sans-serif;
+      font-family: 'Work Sans', system-ui, sans-serif;
       color: var(--ink);
       background: var(--bg);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
-    h1, h2, h3, .display { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.02em; }
+    h1, h2, h3, .display { font-family: 'Archivo Black', sans-serif; font-weight: 400; letter-spacing: -0.005em; }
     a { color: inherit; }
     img { max-width: 100%; display: block; }
     .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
@@ -55,16 +56,16 @@
     /* Nav */
     header {
       position: sticky; top: 0; z-index: 50;
-      background: rgba(250,250,248,0.82);
+      background: rgba(250,250,248,0.86);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
     }
-    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-    .brand { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.02em; text-decoration: none; display: inline-flex; align-items: center; }
-    .brand-logo { height: 30px; width: auto; display: block; }
-    footer .brand-logo { height: 34px; }
-    .nav-links { display: flex; gap: 28px; align-items: center; }
-    .nav-links a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--muted); transition: color .15s; }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
+    .brand { text-decoration: none; display: inline-flex; align-items: center; flex: none; }
+    .brand-logo { height: 26px; width: auto; display: block; }
+    footer .brand-logo { height: 28px; }
+    .nav-links { display: flex; gap: 22px; align-items: center; }
+    .nav-links a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--muted); transition: color .15s; white-space: nowrap; }
     .nav-links a:hover { color: var(--ink); }
     .nav-cta {
       border: 1px solid var(--ink); border-radius: 999px;
@@ -90,11 +91,11 @@
     .lang-menu a.active { font-weight: 600; color: var(--accent); }
 
     /* Hero */
-    .hero { padding: 72px 0 64px; }
+    .hero { padding: 64px 0 48px; }
     .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; }
     .eyebrow { font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 18px; }
-    .hero h1 { font-size: clamp(48px, 8vw, 104px); line-height: 0.92; font-weight: 700; }
-    .hero .lead { font-size: clamp(18px, 2.4vw, 22px); color: var(--muted); margin-top: 22px; max-width: 32ch; }
+    .hero h1 { font-size: clamp(42px, 7vw, 88px); line-height: 0.98; }
+    .hero .lead { font-size: clamp(17px, 2.2vw, 20px); color: var(--muted); margin-top: 22px; max-width: 32ch; }
     .btns { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
@@ -106,33 +107,96 @@
     .btn-ghost { border: 1px solid var(--line); background: #fff; color: var(--ink); }
     .hero-img { position: relative; }
     .hero-img img { width: 100%; border-radius: 8px; aspect-ratio: 3/4; object-fit: cover; filter: grayscale(8%); }
-    .hero-img .tag { position: absolute; left: -10px; bottom: 20px; background: var(--ink); color: var(--bg); font-family:'Space Grotesk',sans-serif; font-weight:700; padding: 8px 16px; border-radius: 4px; font-size: 13px; letter-spacing: 0.08em; }
+    .hero-img .tag { position: absolute; left: -10px; bottom: 20px; background: var(--ink); color: var(--bg); font-family:'Archivo Black',sans-serif; padding: 8px 16px; border-radius: 4px; font-size: 13px; letter-spacing: 0.08em; }
+    .hero-social { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--line); }
+    .hero-social .label { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-weight: 600; }
+    .hero-social a { display: flex; align-items: center; gap: 8px; background: #fff; border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; font-size: 13px; font-weight: 600; text-decoration: none; transition: border-color .15s; }
+    .hero-social a:hover { border-color: var(--ink); }
+    .hero-social svg { width: 15px; height: 15px; fill: var(--ink); }
 
     /* Sections */
-    section { padding: 84px 0; }
+    section { padding: 76px 0; }
     .section-label { font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 14px; }
-    .section-title { font-size: clamp(30px, 4.5vw, 46px); font-weight: 700; line-height: 1.05; max-width: 18ch; }
+    .section-title { font-size: clamp(28px, 4vw, 42px); line-height: 1.08; max-width: 20ch; }
     .alt { background: var(--bg-alt); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 
+    /* Packages */
+    .packages-intro p { color: var(--muted); font-size: 15.5px; line-height: 1.65; max-width: 68ch; margin-top: 12px; }
+    .pkg-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px; margin-top:32px; }
+    .pkg-card { background:#fff; border:1px solid var(--line); border-radius:14px; padding:24px; display:flex; flex-direction:column; gap:10px; }
+    .pkg-card.hi { background:var(--ink); color:#f6f2e4; border-color:var(--ink); }
+    .pkg-eyebrow { font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#a86a2a; }
+    .pkg-card.hi .pkg-eyebrow { color:#cfc199; }
+    .pkg-name { font-size:26px; margin:0; }
+    .pkg-card.hi .pkg-name { color:#f6f2e4; }
+    .pkg-desc { color:var(--muted); font-size:13.5px; line-height:1.5; margin:0; }
+    .pkg-card.hi .pkg-desc { color:#cfcac0; }
+    .pkg-link { margin-top:8px; font-weight:700; font-size:13.5px; color:var(--accent); text-decoration:none; }
+    .pkg-card.hi .pkg-link { color:#f6f2e4; text-decoration:underline; }
+    .pkg-includes { background:#fff; border:1px solid var(--line); border-radius:16px; padding:32px; margin-top:32px; }
+    .pkg-includes-eyebrow { font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--accent); font-weight:700; margin-bottom:4px; }
+    .pkg-includes h3 { font-size:22px; margin-bottom:22px; }
+    .pkg-item-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:20px 26px; }
+    .pkg-item { display:flex; gap:14px; align-items:flex-start; }
+    .pkg-item svg { flex:none; margin-top:2px; }
+    .pkg-item strong { display:block; font-weight:700; font-size:14.5px; margin-bottom:2px; }
+    .pkg-item p { color:var(--muted); font-size:13px; line-height:1.5; margin:0; }
+    .pkg-cta-row { display:flex; align-items:center; gap:18px; flex-wrap:wrap; margin-top:32px; }
+    .pkg-note { font-size:12.5px; color:var(--muted); max-width:46ch; }
+
+    /* Newsletter (Brevo) */
+    #newsletter.dark { background:var(--ink); }
+    .newsletter-grid { display:flex; gap:48px; flex-wrap:wrap; align-items:center; }
+    .newsletter-copy { flex:1; min-width:280px; }
+    .newsletter-copy .section-label { color:#e2a19f; }
+    .newsletter-copy h2 { color:#f6f2e4; }
+    .newsletter-copy p { color:#cfcac0; margin-top:14px; max-width:46ch; font-size:15.5px; line-height:1.6; }
+    .newsletter-embed { flex:none; width:100%; max-width:400px; }
+    .newsletter-embed iframe { width:100%; border-radius:14px; box-shadow:0 24px 60px -20px rgba(0,0,0,.5); }
+
     /* Music */
-    .music-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 36px; }
+    .music-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 32px; }
+    .album-feature { background:#fff; border:1px solid var(--line); border-radius:14px; padding:28px; display:flex; gap:28px; flex-wrap:wrap; align-items:center; margin-bottom:28px; }
+    .album-feature img { width:168px; height:168px; flex:none; border-radius:10px; object-fit:cover; }
+    .album-badge { display:inline-flex; width:fit-content; background:var(--accent2); color:#f6f2e4; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; padding:4px 10px; border-radius:999px; }
+    .album-feature h3 { font-size:24px; margin:6px 0 0; }
+    .album-feature .meta { color:var(--muted); font-size:14px; }
+    .singles-label { font-size:12px; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); font-weight:700; margin:0 0 14px; }
     .player { border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background:#fff; }
     .player iframe { display:block; width:100%; border:0; }
-    .releases { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 28px; }
+    .releases { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 8px; }
     .release { display:flex; gap:16px; align-items:center; padding:16px; border:1px solid var(--line); border-radius:10px; background:#fff; text-decoration:none; transition: border-color .15s, transform .12s; }
     .release:hover { border-color: var(--ink); transform: translateY(-2px); }
     .release img { width:64px; height:64px; border-radius:6px; object-fit:cover; flex:none; }
-    .release h4 { font-family:'Space Grotesk',sans-serif; font-size:16px; }
+    .release h4 { font-family:'Archivo Black',sans-serif; font-size:15px; font-weight:400; }
     .release span { font-size:13px; color:var(--muted); }
     .release-item { display:flex; flex-direction:column; gap:12px; }
     .release-item .release { width:100%; }
     .spotify-embed { width:100%; height:152px; border:0; border-radius:12px; display:block; }
+    .catalog-box { background:#fff; border:1px solid var(--line); border-radius:14px; padding:26px; margin-top:28px; }
+    .catalog-box h3 { font-size:19px; margin:0 0 14px; }
+    .catalog-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; }
+    .catalog-grid a { background:var(--bg-alt); border:1px solid var(--line); border-radius:8px; padding:12px 14px; font-weight:700; font-size:13.5px; text-align:center; text-decoration:none; transition:border-color .15s; }
+    .catalog-grid a:hover { border-color:var(--ink); }
 
     /* About */
     .about-grid { display:grid; grid-template-columns: 0.8fr 1.2fr; gap:56px; align-items:center; }
     .about-grid img { border-radius:8px; aspect-ratio: 4/5; object-fit:cover; filter: grayscale(8%); }
-    .about-grid p { font-size: 18px; color: #33332c; margin-top: 18px; }
+    .about-grid p { font-size: 17px; color: #33332c; margin-top: 18px; }
     .about-grid p + p { margin-top: 14px; }
+
+    /* Voices */
+    .voices-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; margin-top:28px; }
+    .voice-card { background:#fff; border:1px solid var(--line); border-radius:14px; padding:26px; text-align:left; }
+    .voice-head { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
+    .voice-head img { width:48px; height:48px; border-radius:50%; object-fit:cover; flex:none; }
+    .voice-head strong { display:block; font-size:14px; }
+    .voice-head span.role { font-size:12.5px; color:var(--muted); }
+    .voice-head a { font-size:12.5px; color:var(--muted); text-decoration:none; }
+    .voice-head a:hover { color:var(--ink); }
+    .voice-stars { color:var(--accent); letter-spacing:3px; font-size:15px; margin-bottom:10px; }
+    .voice-quote { font-size:15px; line-height:1.6; margin:0; }
+    .voice-translation { color:var(--muted); font-size:12.5px; margin-top:10px; }
 
     /* Booking */
     .book-grid { display:grid; grid-template-columns: 1fr 1fr; gap:56px; }
@@ -140,6 +204,11 @@
     .contact-list a { text-decoration:none; font-weight:500; display:inline-flex; align-items:center; gap:10px; border-bottom:1px solid transparent; }
     .contact-list a:hover { border-bottom-color: var(--ink); }
     .contact-list small { display:block; color:var(--muted); font-weight:400; font-size:13px; }
+    .call-card { background:var(--ink); color:#f6f2e4; border-radius:14px; padding:26px; display:flex; flex-direction:column; gap:12px; }
+    .call-card .pkg-eyebrow { color:#f6f2e4; background:var(--accent); display:inline-flex; width:fit-content; padding:4px 10px; border-radius:999px; }
+    .call-card h3 { font-size:20px; margin:0; color:#f6f2e4; }
+    .call-card p { color:#cfcac0; font-size:14px; line-height:1.6; margin:0; }
+    .call-card .btn-primary { margin-top:6px; text-align:center; justify-content:center; }
     form { display:flex; flex-direction:column; gap:16px; }
     label { font-size:13px; font-weight:600; letter-spacing:0.02em; }
     input, textarea {
@@ -151,17 +220,6 @@
     .hp { position:absolute; left:-5000px; }
     .form-note { font-size:13px; color:var(--muted); }
 
-    /* Testimonial */
-    .testi-wrap { max-width:760px; margin:0 auto; text-align:center; }
-    .testi-stars { color:var(--accent); letter-spacing:4px; font-size:18px; margin-bottom:22px; }
-    .testi-quote { font-family:'Space Grotesk',sans-serif; font-size:clamp(20px,2.8vw,28px); line-height:1.45; letter-spacing:-0.01em; color:var(--ink); }
-    .testi-quote b { font-weight:700; }
-    .testi-author { display:flex; align-items:center; justify-content:center; gap:14px; margin-top:30px; }
-    .testi-avatar { width:52px; height:52px; border-radius:999px; object-fit:cover; flex:none; }
-    .testi-name { text-align:left; }
-    .testi-name strong { font-family:'Space Grotesk',sans-serif; font-size:16px; display:block; }
-    .testi-name span { font-size:13px; color:var(--muted); }
-
     /* Follow / Social */
     .follow-wrap { text-align:center; }
     .follow-sub { color:var(--muted); margin:14px auto 30px; max-width:42ch; }
@@ -171,20 +229,8 @@
     .social-bar svg { width:24px; height:24px; fill:var(--ink); transition:fill .15s; }
     .social-bar a:hover svg { fill:var(--bg); }
 
-    /* Newsletter */
-    .newsletter-wrap { max-width:560px; margin:0 auto; text-align:center; }
-    .newsletter-sub { color:var(--muted); margin:14px auto 28px; max-width:42ch; }
-    .newsletter-form { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
-    .newsletter-form input[type=email] { flex:1; min-width:220px; max-width:340px; padding:13px 16px; border:1px solid var(--line); border-radius:999px; font-family:inherit; font-size:15px; background:#fff; color:var(--ink); }
-    .newsletter-form input[type=email]:focus { outline:none; border-color:var(--ink); }
-    .newsletter-form button { border:0; cursor:pointer; }
-    .newsletter-note { font-size:13px; color:var(--muted); margin-top:14px; }
-    .newsletter-success { display:none; font-family:'Space Grotesk',sans-serif; font-size:20px; color:var(--accent); margin-top:8px; }
-    .newsletter-success.show { display:block; }
-    .newsletter-form.hide { display:none; }
-
     /* Footer */
-    footer { border-top:1px solid var(--line); padding:48px 0; }
+    footer { border-top:1px solid var(--line); padding:44px 0; }
     .foot { display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; align-items:center; }
     .foot-links { display:flex; gap:22px; flex-wrap:wrap; }
     .foot a { color:var(--muted); text-decoration:none; font-size:14px; }
@@ -198,7 +244,7 @@
       .nav-links { display:none; position:absolute; top:64px; left:0; right:0; background:var(--bg); flex-direction:column; align-items:flex-start; padding:18px 24px; gap:18px; border-bottom:1px solid var(--line); }
       .nav-links.open { display:flex; }
       .menu-btn { display:block; }
-      section { padding:60px 0; }
+      section { padding:56px 0; }
     }
   </style>
 </head>
@@ -207,9 +253,11 @@
     <div class="wrap nav">
       <a href="#top" class="brand" aria-label="Vaynex"><img class="brand-logo" src="../images/logo.png" alt="Vaynex" /></a>
       <nav class="nav-links" id="navlinks">
+        <a href="#packages">Pakete</a>
+        <a href="#newsletter">Newsletter</a>
         <a href="#music">Musik</a>
         <a href="#about">Über</a>
-        <a href="#testimonial">Stimmen</a>
+        <a href="#voices">Stimmen</a>
         <a href="#booking">Booking</a>
         <a class="nav-social" href="https://www.instagram.com/vaynex061" target="_blank" rel="noopener" aria-label="Instagram">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.22 1 .48 1.4.9.43.4.7.8.9 1.4.18.4.37 1 .42 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.05 1.2-.25 1.8-.42 2.2-.22.6-.48 1-.9 1.4-.4.43-.8.7-1.4.9-.4.18-1 .37-2.2.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.05-1.8-.25-2.2-.42-.6-.22-1-.48-1.4-.9-.43-.4-.7-.8-.9-1.4-.18-.4-.37-1-.42-2.2C2.21 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.2.25-1.8.42-2.2.22-.6.48-1 .9-1.4.4-.43.8-.7 1.4-.9.4-.18 1-.37 2.2-.42C8.4 2.21 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.07-.9.04-1.4.2-1.7.3-.4.17-.7.36-1 .66-.3.3-.5.6-.66 1-.1.3-.26.8-.3 1.7C3.3 8.5 3.3 8.9 3.3 12s0 3.5.07 4.7c.04.9.2 1.4.3 1.7.17.4.36.7.66 1 .3.3.6.5 1 .66.3.1.8.26 1.7.3 1.2.07 1.6.07 4.7.07s3.5 0 4.7-.07c.9-.04 1.4-.2 1.7-.3.4-.17.7-.36 1-.66.3-.3.5-.6.66-1 .1-.3.26-.8.3-1.7.07-1.2.07-1.6.07-4.7s0-3.5-.07-4.7c-.04-.9-.2-1.4-.3-1.7-.17-.4-.36-.7-.66-1-.3-.3-.6-.5-1-.66-.3-.1-.8-.26-1.7-.3C15.5 4 15.1 4 12 4zm0 3.06A4.94 4.94 0 1 0 12 17a4.94 4.94 0 0 0 0-9.88zm0 8.15A3.2 3.2 0 1 1 12 8.8a3.2 3.2 0 0 1 0 6.4zm6.3-8.35a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0z"/></svg>
@@ -217,7 +265,10 @@
         <a class="nav-social" href="https://www.tiktok.com/@vaynex061" target="_blank" rel="noopener" aria-label="TikTok">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.2v12.93a2.59 2.59 0 1 1-2.59-2.59c.27 0 .53.04.78.12V10.2a5.86 5.86 0 0 0-.78-.05A5.79 5.79 0 1 0 15.34 16V9.4a7.5 7.5 0 0 0 4.4 1.4V7.6a4.28 4.28 0 0 1-3.14-1.78z"/></svg>
         </a>
-        <a href="https://vaynex.gumroad.com" target="_blank" rel="noopener" class="nav-cta">🎧 Beats</a>
+        <a class="nav-social" href="https://www.youtube.com/@vaynex061" target="_blank" rel="noopener" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2s-.2-1.5-.8-2.2c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4h0s-3.9 0-6.7.1c-.4 0-1.3.1-2.1.9-.6.7-.8 2.2-.8 2.2S2.2 9 2.2 10.7v1.6C2.2 14 2.4 15.8 2.4 15.8s.2 1.5.8 2.2c.8.8 1.8.8 2.3.9 1.7.2 6.5.2 6.5.2s3.9 0 6.7-.2c.4 0 1.3-.1 2.1-.9.6-.7.8-2.2.8-2.2s.2-1.7.2-3.5v-1.6c0-1.7-.2-3.5-.2-3.5zM9.9 14.6V8.9l5.4 2.9-5.4 2.8z"/></svg>
+        </a>
+        <a href="#catalog" class="nav-cta">🎧 Beats</a>
         <div class="lang">
           <button class="lang-btn" id="langBtn" aria-label="Sprache" aria-haspopup="true" aria-expanded="false">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.93 6h-2.95a15.7 15.7 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.93 8zM12 4c.83 1.2 1.48 2.53 1.91 4h-3.82c.43-1.47 1.08-2.8 1.91-4zM4.26 14a7.96 7.96 0 0 1 0-4h3.38a16.6 16.6 0 0 0 0 4H4.26zm.81 2h2.95c.32 1.25.78 2.45 1.38 3.56A8.03 8.03 0 0 1 5.07 16zm2.95-8H5.07a8.03 8.03 0 0 1 4.33-3.56A15.7 15.7 0 0 0 8.02 8zM12 20c-.83-1.2-1.48-2.53-1.91-4h3.82A13.6 13.6 0 0 1 12 20zm2.34-6H9.66a14.4 14.4 0 0 1 0-4h4.68a14.4 14.4 0 0 1 0 4zm.27 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56zM16.36 14a16.6 16.6 0 0 0 0-4h3.38a7.96 7.96 0 0 1 0 4h-3.38z"/></svg>
@@ -242,8 +293,14 @@
           <h1>Kompromissloser<br />Boom-Bap.</h1>
           <p class="lead">Staubige Drums, harte Samples und roher Soul. Beats für Rapper, die es ernst meinen.</p>
           <div class="btns">
-            <a href="https://vaynex.gumroad.com" target="_blank" rel="noopener" class="btn btn-primary">Zum Beat-Store →</a>
-            <a href="#booking" class="btn btn-ghost">Booking & Collabs</a>
+            <a href="#packages" class="btn btn-primary">Zu den Packages →</a>
+            <a href="#catalog" class="btn btn-ghost">Zum Beat-Store →</a>
+          </div>
+          <div class="hero-social">
+            <span class="label">Folge dem Prozess</span>
+            <a href="https://www.instagram.com/vaynex061" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.22 1 .48 1.4.9.43.4.7.8.9 1.4.18.4.37 1 .42 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.05 1.2-.25 1.8-.42 2.2-.22.6-.48 1-.9 1.4-.4.43-.8.7-1.4.9-.4.18-1 .37-2.2.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.05-1.8-.25-2.2-.42-.6-.22-1-.48-1.4-.9-.43-.4-.7-.8-.9-1.4-.18-.4-.37-1-.42-2.2C2.21 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.2.25-1.8.42-2.2.22-.6.48-1 .9-1.4.4-.43.8-.7 1.4-.9.4-.18 1-.37 2.2-.42C8.4 2.21 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.07-.9.04-1.4.2-1.7.3-.4.17-.7.36-1 .66-.3.3-.5.6-.66 1-.1.3-.26.8-.3 1.7C3.3 8.5 3.3 8.9 3.3 12s0 3.5.07 4.7c.04.9.2 1.4.3 1.7.17.4.36.7.66 1 .3.3.6.5 1 .66.3.1.8.26 1.7.3 1.2.07 1.6.07 4.7.07s3.5 0 4.7-.07c.9-.04 1.4-.2 1.7-.3.4-.17.7-.36 1-.66.3-.3.5-.6.66-1 .1-.3.26-.8.3-1.7.07-1.2.07-1.6.07-4.7s0-3.5-.07-4.7c-.04-.9-.2-1.4-.3-1.7-.17-.4-.36-.7-.66-1-.3-.3-.6-.5-1-.66-.3-.1-.8-.26-1.7-.3C15.5 4 15.1 4 12 4zm0 3.06A4.94 4.94 0 1 0 12 17a4.94 4.94 0 0 0 0-9.88zm0 8.15A3.2 3.2 0 1 1 12 8.8a3.2 3.2 0 0 1 0 6.4zm6.3-8.35a1.15 1.15 0 1 1-2.3 0 1.15 1.15 0 0 1 2.3 0z"/></svg> @vaynex061</a>
+            <a href="https://www.tiktok.com/@vaynex061" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.2v12.93a2.59 2.59 0 1 1-2.59-2.59c.27 0 .53.04.78.12V10.2a5.86 5.86 0 0 0-.78-.05A5.79 5.79 0 1 0 15.34 16V9.4a7.5 7.5 0 0 0 4.4 1.4V7.6a4.28 4.28 0 0 1-3.14-1.78z"/></svg> @vaynex061</a>
+            <a href="https://www.youtube.com/@vaynex061" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2s-.2-1.5-.8-2.2c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4h0s-3.9 0-6.7.1c-.4 0-1.3.1-2.1.9-.6.7-.8 2.2-.8 2.2S2.2 9 2.2 10.7v1.6C2.2 14 2.4 15.8 2.4 15.8s.2 1.5.8 2.2c.8.8 1.8.8 2.3.9 1.7.2 6.5.2 6.5.2s3.9 0 6.7-.2c.4 0 1.3-.1 2.1-.9.6-.7.8-2.2.8-2.2s.2-1.7.2-3.5v-1.6c0-1.7-.2-3.5-.2-3.5zM9.9 14.6V8.9l5.4 2.9-5.4 2.8z"/></svg> @vaynex061</a>
           </div>
         </div>
         <div class="hero-img">
@@ -253,17 +310,124 @@
       </div>
     </section>
 
+    <!-- PACKAGES -->
+    <section id="packages" class="alt">
+      <div class="wrap">
+        <div class="packages-intro">
+          <div class="section-label">Zusammenarbeit</div>
+          <h2 class="section-title" style="max-width:24ch;">Die meisten Producer verkaufen dir einen Beat. Das hier kommt bei mir noch dazu.</h2>
+          <p>Vocals aufgenommen, gemischt und gemastert, dazu alles rund um den Release gemeinsam angegangen: Marketing, Rechte, und der Papierkram, der sonst untergeht. Jedes Package wird auf dein Projekt zugeschnitten, der Preis ist deshalb ein Gespräch, kein Preisschild.</p>
+        </div>
+
+        <div class="pkg-grid">
+          <div class="pkg-card">
+            <span class="pkg-eyebrow">Bronze · 4 Songs</span>
+            <h3 class="pkg-name">Bronze</h3>
+            <p class="pkg-desc">Für eine erste EP oder eine richtige Vorstellung. Alles unten, von Anfang bis Ende.</p>
+            <a href="#booking" class="pkg-link">Preis anfragen →</a>
+          </div>
+          <div class="pkg-card hi">
+            <span class="pkg-eyebrow">Silver · 8 Songs · Am meisten gebucht</span>
+            <h3 class="pkg-name">Silver</h3>
+            <p class="pkg-desc">Ein ganzes Projekt. Platz, einen Sound zu finden, und trotzdem als ein Werk veröffentlicht.</p>
+            <a href="#booking" class="pkg-link">Preis anfragen →</a>
+          </div>
+          <div class="pkg-card">
+            <span class="pkg-eyebrow">Gold · 12 Songs</span>
+            <h3 class="pkg-name">Gold</h3>
+            <p class="pkg-desc">Ein ganzes Album, gebaut und veröffentlicht mit einem Producer, vom ersten Beat bis zum letzten Mix.</p>
+            <a href="#booking" class="pkg-link">Preis anfragen →</a>
+          </div>
+        </div>
+
+        <div class="pkg-includes">
+          <div class="pkg-includes-eyebrow">In jedem Package, Bronze bis Gold</div>
+          <h3>Neun Dinge, die die meisten Beat-Producer nicht bieten.</h3>
+          <div class="pkg-item-grid">
+            <div class="pkg-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8f2726" stroke-width="1.8"><circle cx="12" cy="8" r="3.4"></circle><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"></path></svg>
+              <div><strong>Persönlicher 1:1-Kontakt</strong><p>Während des ganzen Projekts, keine Account-Manager dazwischen.</p></div>
+            </div>
+            <div class="pkg-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8f2726" stroke-width="1.8"><rect x="9" y="2.5" width="6" height="11" rx="3"></rect><path d="M5.5 11.5a6.5 6.5 0 0 0 13 0"></path><path d="M12 18v3.5M9 21.5h6"></path></svg>
+              <div><strong>Vocal Engineering</strong><p>Richtig aufgenommen, nicht einfach über den Beat gelegt. Studiokosten können dazukommen.</p></div>
+            </div>
+            <div class="pkg-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8f2726" stroke-width="1.8"><path d="M5 20V10M12 20V4M19 20v-7"></path><circle cx="5" cy="8" r="1.6" fill="#8f2726" stroke="none"></circle><circle cx="12" cy="14" r="1.6" fill="#8f2726" stroke="none"></circle><circle cx="19" cy="10.5" r="1.6" fill="#8f2726" stroke="none"></circle></svg>
+              <div><strong>Mixing &amp; Mastering</strong><p>Bereit für den Release auf Streaming, kein grober Rohmix.</p></div>
+            </div>
+            <div class="pkg-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8f2726" stroke-width="1.8"><path d="M3 7.5h6l2 2.3h10V18a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 18Z"></path></svg>
+              <div><strong>Marketingplan</strong><p>Ein echter Plan für den Release, geliefert über Google Drive.</p></div>
+            </div>
+            <div class="pkg-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8f2726" stroke-width="1.8"><path d="M12 3.5 5 6v5.5c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6Z"></path><path d="m9.3 12 1.9 1.9 3.6-3.8"></path></svg>
+              <div><strong>Copyright &amp; Masterrechte</strong><p>Bleiben zu 100% bei dir. Kein Druckmittel, um dich zu binden.</p></div>
+            </div>
+            <div class="pkg-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8f2726" stroke-width="1.8"><rect x="5.5" y="2.5" width="13" height="19" rx="1.5"></rect><path d="M8.5 7.5h7M8.5 11.5h7M8.5 15.5h4"></path></svg>
+              <div><strong>Release-Plan-Dokument</strong><p>Ein schriftlicher Zeitplan für vor und nach dem Release.</p></div>
+            </div>
+            <div class="pkg-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8f2726" stroke-width="1.8"><path d="M4 5.5h16v10H9l-3.5 3v-3H4Z"></path></svg>
+              <div><strong>Social-Media-Cheat-Sheet</strong><p>Was rund um einen Release wirklich gepostet wird, in klaren Schritten.</p></div>
+            </div>
+            <div class="pkg-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8f2726" stroke-width="1.8"><path d="M12 20s-7-4.4-7-9.5A4 4 0 0 1 12 8a4 4 0 0 1 7 2.5C19 15.6 12 20 12 20Z"></path></svg>
+              <div><strong>Fanbase-Interaction-Sheet</strong><p>Wie du mit den Leuten sprichst, die auftauchen.</p></div>
+            </div>
+            <div class="pkg-item">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8f2726" stroke-width="1.8"><path d="M9 4 4 6v14l5-2 6 2 5-2V4l-5 2-6-2Z"></path><path d="M9 4v14M15 6v14"></path></svg>
+              <div><strong>Music Industry Map</strong><p>Ein Überblick, wer was macht, damit du nicht raten musst.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pkg-cta-row">
+          <a href="#booking" class="btn btn-primary">Preis im Gratis-Call besprechen →</a>
+          <span class="pkg-note">Keine Preisliste, kein Countdown, kein Upsell-Trichter. Immer dieselben neun Dinge, die Zahl kommt aus einem Gratis-15-Minuten-Gespräch.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEWSLETTER (Brevo) -->
+    <section id="newsletter" class="dark">
+      <div class="wrap newsletter-grid">
+        <div class="newsletter-copy">
+          <div class="section-label">Werde Teil der Liste</div>
+          <h2 class="section-title">Neue Beats zuerst.</h2>
+          <p>Neue Beats, Sample-Packs und alles rund um Camera di Pressione landen hier zuerst, vor Instagram. Alle 50 Abonnenten bekommt eine Person einen Beat gratis, 50/50 Rechte, Release auf dem eigenen Spotify.</p>
+        </div>
+        <div class="newsletter-embed">
+          <iframe width="540" height="305" src="https://04e549b5.sibforms.com/v2/serve/MUIFAC1AKbsyzhg_v65z7bYfDEQUhcVBo316j4eDqwjLodNLewc97D04mflvdnwneUTJZb5cZwgMTE_qbU1knM0B9MtCrfYv9bl3GQltF8vbnBX8LG6EsXuO6MzfERDzXbCHB2gr4w0sCYqs-G4F4ax-e-yQaZEMuRgSiifVO0xAOpXLc3cKHVLGSDVwMDbc41E4GXZ2y65OkfU1Bw==" frameborder="0" scrolling="auto" allowfullscreen style="display: block; margin-left: auto; margin-right: auto; max-width: 100%;"></iframe>
+        </div>
+      </div>
+    </section>
+
     <!-- MUSIC -->
-    <section id="music" class="alt">
+    <section id="music">
       <div class="wrap">
         <div class="music-head">
           <div>
             <div class="section-label">Hören</div>
             <h2 class="section-title">Beats & Releases</h2>
           </div>
-          <a href="https://vaynex.gumroad.com" target="_blank" rel="noopener" class="btn btn-primary">Beats holen →</a>
+          <a href="#catalog" class="btn btn-primary">Beats holen →</a>
         </div>
 
+        <div class="album-feature">
+          <img src="../images/cover-camera.jpg" alt="Camera di Pressione Cover" />
+          <div>
+            <span class="album-badge">Jetzt draussen</span>
+            <h3>Camera di Pressione</h3>
+            <p class="meta">Album · Ari Selva x Vaynex · 8 Tracks, feat. DJ Crazyfish &amp; M-Skills auf "Enclave"</p>
+            <div class="btns" style="margin-top:14px;">
+              <a href="https://distrokid.com/hyperfollow/ariselvaandvaynex/camera-di-pressione" target="_blank" rel="noopener" class="btn btn-primary">Album streamen →</a>
+            </div>
+          </div>
+        </div>
+
+        <p class="singles-label">Vorab-Singles</p>
         <div class="releases">
           <div class="release-item">
             <a class="release" href="https://distrokid.com/hyperfollow/ariselva/prima-della-distruzione-feat-vaynex" target="_blank" rel="noopener">
@@ -287,89 +451,106 @@
             <iframe class="spotify-embed" src="https://open.spotify.com/embed/track/5XL3rJDTImnW8wlpf06HoR" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
           </div>
         </div>
+
+        <div class="catalog-box" id="catalog">
+          <div class="section-label" style="margin-bottom:4px;">Beat-Katalog</div>
+          <h3>Nach Stimmung durchstöbern, auf Disco.</h3>
+          <div class="catalog-grid">
+            <a href="https://s.disco.ac/wuzdjxmjomoj" target="_blank" rel="noopener">Soul Beats</a>
+            <a href="https://s.disco.ac/egsjidtiqevy" target="_blank" rel="noopener">Trap Beats</a>
+            <a href="https://s.disco.ac/qzwlqsfvymjx" target="_blank" rel="noopener">Orchestral Beats</a>
+            <a href="https://s.disco.ac/lyhpdzdeltxm" target="_blank" rel="noopener">Dissonant Beats</a>
+            <a href="https://s.disco.ac/rvslokzcmzwx" target="_blank" rel="noopener">Industrial Beats</a>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- ABOUT -->
-    <section id="about">
+    <section id="about" class="alt">
       <div class="wrap about-grid">
         <img src="../images/portrait.jpg" alt="Vaynex" />
         <div>
           <div class="section-label">Über</div>
           <h2 class="section-title">Die Geschichte hinter den Beats.</h2>
           <p>Vaynex ist ein Boom-Bap-Producer aus der Schweiz mit einer einzigen Regel: keine Kompromisse. Der Sound basiert auf staubigen Drums, handverlesenen Samples und der rohen, kopfnickenden Energie, die die goldene Ära des Hip-Hop geprägt hat.</p>
-          <p>Nach einem bewussten Neustart als Beatmaker, analog statt Algorithmus und Handwerk statt Abkürzungen, veröffentlicht Vaynex weiterhin Beats und Kollaborationen für unabhängige Artists, die Substanz wollen, keine Füllware.</p>
+          <p>Nach einem bewussten Neustart als Beatmaker, analog statt Algorithmus und Handwerk statt Abkürzungen, veröffentlicht Vaynex weiterhin Beats und Kollaborationen für unabhängige Artists, die Substanz wollen, keine Füllware. Neben Boom-Bap gibt es eine dunklere Cinematic-Trap-Seite, für Rapper, die etwas rauslassen statt sortieren müssen.</p>
           <p>Offen für Collabs, Custom Beats und Features. Wer mit Haltung rappt, mit dem verstehen wir uns.</p>
         </div>
       </div>
     </section>
 
-    <!-- TESTIMONIAL -->
-    <section id="testimonial" class="alt">
-      <div class="wrap testi-wrap">
+    <!-- VOICES -->
+    <section id="voices">
+      <div class="wrap">
         <div class="section-label">Stimmen</div>
-        <div class="testi-stars">★★★★★</div>
-        <p class="testi-quote">Mit Vaynex zu arbeiten ist immer inspirierend. Sein <b>roher Boom-Bap</b>-Sound ist zugleich <b>rau</b> und <b>atmosphärisch</b>, und er ist unglaublich <b>produktiv</b>, <b>verlässlich</b> und <b>einfach im Umgang</b>. Seine Beats erzeugen genau die Stimmung, die <b>einen sofort zum Schreiben bringt.</b></p>
-        <div class="testi-author">
-          <img class="testi-avatar" src="../images/avatar-ari.png" alt="Ari Selva" />
-          <span class="testi-name"><strong>Ari Selva</strong><span>Recording Artist</span></span>
+        <h2 class="section-title">Was Kollaborateure sagen.</h2>
+        <div class="voices-grid">
+          <div class="voice-card">
+            <div class="voice-head">
+              <img src="../images/avatar-ari.png" alt="Ari Selva" />
+              <div><strong>Ari Selva</strong><span class="role">Recording Artist</span> · <a href="https://instagram.com/selva_stari" target="_blank" rel="noopener">@selva_stari</a></div>
+            </div>
+            <div class="voice-stars">★★★★★</div>
+            <p class="voice-quote">"Mit Vaynex zu arbeiten ist immer inspirierend. Sein roher Boom-Bap-Sound ist zugleich rau und atmosphärisch, und er ist unglaublich produktiv, verlässlich und einfach im Umgang. Seine Beats erzeugen genau die Stimmung, die einen sofort zum Schreiben bringt."</p>
+          </div>
+          <div class="voice-card">
+            <div class="voice-head">
+              <img src="../images/avatar-abeiz.png" alt="Abeiz" />
+              <div><strong>Abeiz</strong><span class="role">Rapper, Milano</span> · <a href="https://instagram.com/abeiz" target="_blank" rel="noopener">@abeiz</a></div>
+            </div>
+            <div class="voice-stars">★★★★★</div>
+            <p class="voice-quote">"Lavorare con Vaynex è molto bello e dinamico. Uno dei produttori migliori con cui ho collaborato, oltre professionalità anche carisma e gentilezza."</p>
+            <p class="voice-translation">Einer der besten Producer, mit denen ich zusammengearbeitet habe, professionell, charismatisch und freundlich.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- BOOKING -->
-    <section id="booking">
-      <div class="wrap book-grid">
-        <div>
-          <div class="section-label">Kontakt</div>
-          <h2 class="section-title">Booking & Collabs</h2>
-          <p style="color:var(--muted); margin-top:16px; max-width:38ch;">Custom Beats, Features, Mixing oder eine Collab? Schreib mir. Ich lese alles und antworte persönlich.</p>
-          <ul class="contact-list">
-            <li><a href="mailto:mail@vaynex.ch">✉️ mail@vaynex.ch <small>Direkte E-Mail</small></a></li>
-            <li><a href="https://www.instagram.com/vaynex061" target="_blank" rel="noopener">📷 @vaynex061 <small>Instagram, schnellste Antwort</small></a></li>
-            <li><a href="https://vaynex.gumroad.com" target="_blank" rel="noopener">🎧 vaynex.gumroad.com <small>Beat-Store & Lizenzen</small></a></li>
-          </ul>
+    <section id="booking" class="alt">
+      <div class="wrap">
+        <div class="section-label">Kontakt</div>
+        <h2 class="section-title">Booking &amp; Collabs</h2>
+
+        <div class="book-grid" style="margin-top:28px;">
+          <div>
+            <div class="call-card" style="margin-bottom:24px;">
+              <span class="pkg-eyebrow">Kein Pitch, keine Verpflichtung</span>
+              <h3>Gratis 15-Minuten-Call.</h3>
+              <p>Arbeitest du an eigener Musik und willst eine zweite Meinung, oder einfach über Prozess und Beats reden? Sichere dir einen Slot.</p>
+              <a href="https://cal.com/vaynex061/free-15-min-call" target="_blank" rel="noopener" class="btn btn-primary">Termin auf Cal.com buchen →</a>
+            </div>
+            <p style="color:var(--muted); max-width:38ch;">Custom Beats, Features, Mixing oder eine Collab? Schreib mir. Ich lese alles und antworte persönlich.</p>
+            <ul class="contact-list">
+              <li><a href="mailto:mail@vaynex.ch">✉️ mail@vaynex.ch <small>Direkte E-Mail</small></a></li>
+              <li><a href="https://www.instagram.com/vaynex061" target="_blank" rel="noopener">📷 @vaynex061 <small>Instagram, schnellste Antwort</small></a></li>
+              <li><a href="#catalog">🎧 Beat-Katalog <small>Beats & Lizenzen</small></a></li>
+            </ul>
+          </div>
+          <form name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks.html">
+            <input type="hidden" name="form-name" value="booking" />
+            <p class="hp"><label>Bitte nicht ausfüllen: <input name="bot-field" /></label></p>
+            <div>
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" required />
+            </div>
+            <div>
+              <label for="email">E-Mail</label>
+              <input id="email" name="email" type="email" required />
+            </div>
+            <div>
+              <label for="topic">Worum geht's?</label>
+              <input id="topic" name="topic" type="text" placeholder="Custom Beat, Collab, Feature…" />
+            </div>
+            <div>
+              <label for="message">Nachricht</label>
+              <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="border:0; cursor:pointer; justify-content:center;">Nachricht senden →</button>
+            <p class="form-note">Oder einfach eine E-Mail an <a href="mailto:mail@vaynex.ch">mail@vaynex.ch</a>.</p>
+          </form>
         </div>
-
-        <form name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks.html">
-          <input type="hidden" name="form-name" value="booking" />
-          <p class="hp"><label>Bitte nicht ausfüllen: <input name="bot-field" /></label></p>
-          <div>
-            <label for="name">Name</label>
-            <input id="name" name="name" type="text" required />
-          </div>
-          <div>
-            <label for="email">E-Mail</label>
-            <input id="email" name="email" type="email" required />
-          </div>
-          <div>
-            <label for="topic">Worum geht's?</label>
-            <input id="topic" name="topic" type="text" placeholder="Custom Beat, Collab, Feature…" />
-          </div>
-          <div>
-            <label for="message">Nachricht</label>
-            <textarea id="message" name="message" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary" style="border:0; cursor:pointer; justify-content:center;">Nachricht senden →</button>
-          <p class="form-note">Oder einfach eine E-Mail an <a href="mailto:mail@vaynex.ch">mail@vaynex.ch</a>.</p>
-        </form>
-      </div>
-    </section>
-
-    <!-- NEWSLETTER -->
-    <section id="newsletter">
-      <div class="wrap newsletter-wrap">
-        <div class="section-label">Newsletter</div>
-        <h2 class="section-title" style="margin:0 auto;">Neue Beats zuerst.</h2>
-        <p class="newsletter-sub">Trag dich ein für neue Releases, kostenlose Beats und Behind-the-Scenes. Kein Spam.</p>
-        <form name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="newsletter-form" id="newsletterForm">
-          <input type="hidden" name="form-name" value="newsletter" />
-          <p class="hp"><label>Bitte nicht ausfüllen: <input name="bot-field" /></label></p>
-          <input type="email" name="email" placeholder="deine@email.com" aria-label="E-Mail-Adresse" required />
-          <button type="submit" class="btn btn-primary">Abonnieren →</button>
-        </form>
-        <p class="newsletter-success" id="newsletterSuccess">Danke fürs Abonnieren. Du bist dabei. 🎧</p>
-        <p class="newsletter-note">Mit dem Abonnieren stimmst du zu, E-Mails von Vaynex zu erhalten. Jederzeit abbestellbar.</p>
       </div>
     </section>
 
@@ -386,6 +567,9 @@
           <a href="https://www.tiktok.com/@vaynex061" target="_blank" rel="noopener" aria-label="TikTok">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.82a4.28 4.28 0 0 1-1.06-2.82h-3.2v12.93a2.59 2.59 0 1 1-2.59-2.59c.27 0 .53.04.78.12V10.2a5.86 5.86 0 0 0-.78-.05A5.79 5.79 0 1 0 15.34 16V9.4a7.5 7.5 0 0 0 4.4 1.4V7.6a4.28 4.28 0 0 1-3.14-1.78z"/></svg>
           </a>
+          <a href="https://www.youtube.com/@vaynex061" target="_blank" rel="noopener" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2s-.2-1.5-.8-2.2c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4h0s-3.9 0-6.7.1c-.4 0-1.3.1-2.1.9-.6.7-.8 2.2-.8 2.2S2.2 9 2.2 10.7v1.6C2.2 14 2.4 15.8 2.4 15.8s.2 1.5.8 2.2c.8.8 1.8.8 2.3.9 1.7.2 6.5.2 6.5.2s3.9 0 6.7-.2c.4 0 1.3-.1 2.1-.9.6-.7.8-2.2.8-2.2s.2-1.7.2-3.5v-1.6c0-1.7-.2-3.5-.2-3.5zM9.9 14.6V8.9l5.4 2.9-5.4 2.8z"/></svg>
+          </a>
           <a href="mailto:mail@vaynex.ch" aria-label="E-Mail">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm0 2v.4l9 5.6 9-5.6V7H3zm0 2.75V17h18V9.75l-8.47 5.27a1 1 0 0 1-1.06 0L3 9.75z"/></svg>
           </a>
@@ -398,10 +582,10 @@
     <div class="wrap foot">
       <a href="#top" class="brand" aria-label="Vaynex"><img class="brand-logo" src="../images/logo.png" alt="Vaynex" /></a>
       <div class="foot-links">
+        <a href="#packages">Pakete</a>
         <a href="#music">Musik</a>
         <a href="#about">Über</a>
         <a href="#booking">Booking</a>
-        <a href="https://vaynex.gumroad.com" target="_blank" rel="noopener">Beats</a>
         <a href="https://www.instagram.com/vaynex061" target="_blank" rel="noopener">Instagram</a>
         <a href="/impressum.html">Impressum</a>
       </div>
@@ -424,23 +608,6 @@
       langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
     document.addEventListener('click', function () { langMenu.classList.remove('open'); langBtn.setAttribute('aria-expanded','false'); });
-
-    var nlForm = document.getElementById('newsletterForm');
-    if (nlForm) {
-      nlForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        var data = new URLSearchParams(new FormData(nlForm)).toString();
-        fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: data })
-          .then(function () {
-            nlForm.classList.add('hide');
-            document.getElementById('newsletterSuccess').classList.add('show');
-          })
-          .catch(function () {
-            nlForm.classList.add('hide');
-            document.getElementById('newsletterSuccess').classList.add('show');
-          });
-      });
-    }
   </script>
 </body>
 </html>
