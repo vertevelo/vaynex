@@ -210,7 +210,7 @@
     @media (max-width:860px) { .gallery-grid { grid-template-columns:repeat(2,1fr); } }
 
     /* Voices */
-    .voices-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; margin-top:28px; }
+    .voices-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; margin-top:28px; }
     .voice-card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:26px; text-align:left; }
     .voice-head { display:flex; align-items:center; gap:12px; margin-bottom:14px; }
     .voice-head img { width:48px; height:48px; border-radius:50%; object-fit:cover; flex:none; }
@@ -221,6 +221,14 @@
     .voice-stars { color:var(--accent); letter-spacing:3px; font-size:15px; margin-bottom:10px; }
     .voice-quote { font-size:15px; line-height:1.6; margin:0; }
     .voice-translation { color:var(--muted); font-size:12.5px; margin-top:10px; }
+    .voice-card.wide { grid-column:1 / -1; }
+    .voice-card.wide .voice-body { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px; }
+    .voice-card.wide .voice-translation { margin-top:0; padding-left:28px; border-left:1px solid var(--line); font-size:13.5px; line-height:1.6; }
+    @media (max-width:720px) {
+      .voices-grid, .voice-card.wide .voice-body { grid-template-columns:minmax(0,1fr); }
+      .voice-card.wide .voice-body { gap:0; }
+      .voice-card.wide .voice-translation { margin-top:10px; padding-left:0; border-left:0; }
+    }
 
     /* Booking */
     .book-grid { display:grid; grid-template-columns: 1fr 1fr; gap:56px; }
@@ -678,6 +686,17 @@
             <div class="voice-stars">★★★★★</div>
             <p class="voice-quote">"Lavorare con Vaynex è molto bello e dinamico. Uno dei produttori migliori con cui ho collaborato, oltre professionalità anche carisma e gentilezza."</p>
             <p class="voice-translation">One of the best producers I've worked with — professional, charismatic and kind.</p>
+          </div>
+          <div class="voice-card wide">
+            <div class="voice-head">
+              <img src="images/avatar-damz.jpg" alt="Damz" />
+              <div><strong>Damz</strong><span class="role">Rapper, Yverdon</span> · <a href="https://instagram.com/damz.saleplume" target="_blank" rel="noopener">@damz.saleplume</a></div>
+            </div>
+            <div class="voice-stars">★★★★★</div>
+            <div class="voice-body">
+              <p class="voice-quote">"Franchement, gros coup de cœur pour les instrus de Vaynex. Dès la première écoute, je me suis dit&nbsp;: c’est avec lui que je veux bosser. Ses drums ont cette vibe new-yorkaise 90’s que je kiffe, avec une vraie identité derrière. On ne parle même pas la même langue, mais on s’est compris direct. Pas besoin de grands discours quand on partage la même culture&nbsp;: le hip-hop est un langage universel. Les Romands, si vous cherchez un beatmaker suisse qui a du son et du caractère, allez écouter Vaynex. Vous êtes au bon endroit."</p>
+              <p class="voice-translation">Honestly, I fell hard for Vaynex’s beats. From the very first listen I thought: he’s the one I want to work with. His drums have that 90s New York vibe I love, with a real identity behind them. We don’t even speak the same language, but we understood each other right away. No need for big speeches when you share the same culture: hip-hop is a universal language. French-speaking Swiss, if you’re looking for a Swiss beatmaker with sound and character, go listen to Vaynex. You’re in the right place.</p>
+            </div>
           </div>
         </div>
       </div>
