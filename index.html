@@ -188,6 +188,13 @@
     .catalog-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; }
     .catalog-grid a { background:var(--bg-alt); border:1px solid var(--line); border-radius:8px; padding:12px 14px; font-weight:700; font-size:13.5px; text-align:center; text-decoration:none; transition:border-color .15s; }
     .catalog-grid a:hover { border-color:var(--ink); }
+    .store-teaser { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:6px 24px; background:var(--card); border:1px solid var(--line); border-radius:14px; padding:26px; margin-bottom:28px; text-decoration:none; transition:border-color .15s; }
+    .store-teaser:hover { border-color:var(--ink); }
+    .store-teaser .section-label { grid-column:1; margin:0; }
+    .store-teaser strong { grid-column:1; font-family:'Archivo Black', sans-serif; font-weight:400; font-size:clamp(22px,3vw,30px); line-height:1.1; }
+    .store-teaser-text { grid-column:1; color:var(--muted); max-width:56ch; }
+    .store-teaser .btn { grid-column:2; grid-row:1 / span 3; }
+    @media (max-width:720px) { .store-teaser { grid-template-columns:minmax(0,1fr); } .store-teaser .btn { grid-column:1; grid-row:auto; justify-self:start; margin-top:8px; } }
 
     /* About */
     .about-grid { display:grid; grid-template-columns: 0.8fr 1.2fr; gap:56px; align-items:center; }
@@ -299,7 +306,7 @@
         <a class="nav-social" href="https://www.youtube.com/@vaynex061" target="_blank" rel="noopener" aria-label="YouTube">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.6 7.2s-.2-1.5-.8-2.2c-.8-.8-1.7-.8-2.1-.9C15.9 4 12 4 12 4h0s-3.9 0-6.7.1c-.4 0-1.3.1-2.1.9-.6.7-.8 2.2-.8 2.2S2.2 9 2.2 10.7v1.6C2.2 14 2.4 15.8 2.4 15.8s.2 1.5.8 2.2c.8.8 1.8.8 2.3.9 1.7.2 6.5.2 6.5.2s3.9 0 6.7-.2c.4 0 1.3-.1 2.1-.9.6-.7.8-2.2.8-2.2s.2-1.7.2-3.5v-1.6c0-1.7-.2-3.5-.2-3.5zM9.9 14.6V8.9l5.4 2.9-5.4 2.8z"/></svg>
         </a>
-        <a href="#catalog" class="nav-cta">🎧 Beats</a>
+        <a href="/beats/" class="nav-cta">🎧 Beats</a>
         <div class="lang">
           <button class="lang-btn" id="langBtn" aria-label="Language" aria-haspopup="true" aria-expanded="false">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm6.93 6h-2.95a15.7 15.7 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.93 8zM12 4c.83 1.2 1.48 2.53 1.91 4h-3.82c.43-1.47 1.08-2.8 1.91-4zM4.26 14a7.96 7.96 0 0 1 0-4h3.38a16.6 16.6 0 0 0 0 4H4.26zm.81 2h2.95c.32 1.25.78 2.45 1.38 3.56A8.03 8.03 0 0 1 5.07 16zm2.95-8H5.07a8.03 8.03 0 0 1 4.33-3.56A15.7 15.7 0 0 0 8.02 8zM12 20c-.83-1.2-1.48-2.53-1.91-4h3.82A13.6 13.6 0 0 1 12 20zm2.34-6H9.66a14.4 14.4 0 0 1 0-4h4.68a14.4 14.4 0 0 1 0 4zm.27 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56zM16.36 14a16.6 16.6 0 0 0 0-4h3.38a7.96 7.96 0 0 1 0 4h-3.38z"/></svg>
@@ -325,7 +332,7 @@
         <p class="lead">Dusty drums, hard-hitting samples and raw soul. Beats made for rappers who keep it real.</p>
         <div class="btns">
           <a href="#packages" class="btn btn-primary">See the Packages →</a>
-          <a href="#catalog" class="btn btn-ghost">Browse the Beat Store →</a>
+          <a href="/beats/" class="btn btn-ghost">Browse the Beat Store →</a>
         </div>
         <div class="hero-social">
           <span class="label">Follow the process</span>
@@ -575,15 +582,15 @@
             <div class="section-label">Listen</div>
             <h2 class="section-title">Beats & Releases</h2>
           </div>
-          <a href="#catalog" class="btn btn-primary">Get beats →</a>
+          <a href="/beats/" class="btn btn-primary">Get beats →</a>
         </div>
 
-        <p class="singles-label">Every beat, one player</p>
-        <div class="player" style="margin-bottom:28px;">
-          <iframe width="100%" height="600" scrolling="no" frameborder="no" allow="autoplay"
-            title="Vaynex Boombap Beats, SoundCloud playlist"
-            src="https://w.soundcloud.com/player/?url=https%3A%2F%2Fapi.soundcloud.com%2Fplaylists%2F2279411162&color=%238f2726&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false&show_artwork=true"></iframe>
-        </div>
+        <a class="store-teaser" id="catalog" href="/beats/">
+          <span class="section-label">Beat Store</span>
+          <strong>Every beat, one place.</strong>
+          <span class="store-teaser-text">Listen to every beat and see what's available, reserved or sold. Buy by email, I reply with the license.</span>
+          <span class="btn btn-primary">Open the Beat Store →</span>
+        </a>
 
         <div class="album-feature">
           <img src="images/cover-camera.jpg" alt="Camera di Pressione cover" />
@@ -602,18 +609,6 @@
           <iframe class="spotify-embed" title="Prima Della Distruzione, Ari Selva feat. Vaynex" src="https://open.spotify.com/embed/album/51wfBjDRMlhyBf1kQGVbop" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
           <iframe class="spotify-embed" title="Il Rabdomante, Ari Selva feat. Vaynex" src="https://open.spotify.com/embed/track/45mPfyAmHdpG3GxQnmsaNg" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
           <iframe class="spotify-embed" title="Hollow District, Vaynex" src="https://open.spotify.com/embed/track/5XL3rJDTImnW8wlpf06HoR" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-        </div>
-
-        <div class="catalog-box" id="catalog">
-          <div class="section-label" style="margin-bottom:4px;">Beat catalog</div>
-          <h3>Browse by mood, on Disco.</h3>
-          <div class="catalog-grid">
-            <a href="https://s.disco.ac/wuzdjxmjomoj" target="_blank" rel="noopener">Soul Beats</a>
-            <a href="https://s.disco.ac/egsjidtiqevy" target="_blank" rel="noopener">Trap Beats</a>
-            <a href="https://s.disco.ac/qzwlqsfvymjx" target="_blank" rel="noopener">Orchestral Beats</a>
-            <a href="https://s.disco.ac/lyhpdzdeltxm" target="_blank" rel="noopener">Dissonant Beats</a>
-            <a href="https://s.disco.ac/rvslokzcmzwx" target="_blank" rel="noopener">Industrial Beats</a>
-          </div>
         </div>
       </div>
     </section>
@@ -737,7 +732,7 @@
             <ul class="contact-list">
               <li><a href="mailto:mail@vaynex.ch">✉️ mail@vaynex.ch <small>Direct email</small></a></li>
               <li><a href="https://www.instagram.com/vaynex061" target="_blank" rel="noopener">📷 @vaynex061 <small>Instagram, fastest reply</small></a></li>
-              <li><a href="#catalog">🎧 Beat catalog <small>Beats & licenses</small></a></li>
+              <li><a href="/beats/">🎧 Beat Store <small>Beats & licenses</small></a></li>
             </ul>
           </div>
           <form name="booking" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks.html">

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <!-- Start cookieyes banner -->
+  <script id="cookieyes" type="text/javascript" src="https://cdn-cookieyes.com/client_data/eccc1c7f3ebab6ce34184bbb/script.js"></script>
+  <!-- End cookieyes banner -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Beat-Store · Vaynex · Handgemachte Boom-Bap-Beats</title>
+  <meta name="description" content="Handgemachte Boom-Bap-Beats von Vaynex, Produzent aus der Schweiz. Jeden Beat anhören und sehen, was verfügbar, reserviert oder verkauft ist. Nur Exklusivlizenzen, jeder Beat wird einmal verkauft." />
+  <link rel="canonical" href="https://www.vaynex.ch/de/beats/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Vaynex" />
+  <meta property="og:title" content="Vaynex Beat-Store · Jeder Beat wird nur einmal verkauft." />
+  <meta property="og:description" content="Handgemachter Boom-Bap aus der Schweiz. Exklusivlizenzen, 100% der Masterrechte." />
+  <meta property="og:url" content="https://www.vaynex.ch/de/beats/" />
+  <meta property="og:image" content="https://www.vaynex.ch/images/portrait.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Vaynex Beat-Store · Jeder Beat wird nur einmal verkauft." />
+  <meta name="twitter:description" content="Handgemachter Boom-Bap aus der Schweiz. Exklusivlizenzen, 100% der Masterrechte." />
+
+  <link rel="alternate" hreflang="en" href="https://www.vaynex.ch/beats/" />
+  <link rel="alternate" hreflang="de" href="https://www.vaynex.ch/de/beats/" />
+  <link rel="alternate" hreflang="x-default" href="https://www.vaynex.ch/beats/" />
+
+  <link rel="preconnect" href="https://vaynex.b-cdn.net" crossorigin />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/beats/store.css" />
+</head>
+<body>
+  <header class="site">
+    <div class="wrap nav">
+      <a href="/de/" class="brand" aria-label="Vaynex Startseite"><img src="/images/logo-light.png" alt="Vaynex" /></a>
+      <div class="nav-right">
+        <a href="/de/#packages" class="nav-link opt">Packages</a>
+        <a href="/de/coffee/" class="nav-link opt">Virtual Coffee</a>
+        <div class="lang-switch" aria-label="Sprache">
+          <a href="/beats/" hreflang="en">EN</a>
+          <a href="/de/beats/" class="active" aria-current="page">DE</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <div class="eyebrow">Beat-Store · Boom-Bap</div>
+          <h1>Jeder Beat wird nur einmal verkauft.</h1>
+        </div>
+        <p class="lead">Handgemachter Boom-Bap aus der Schweiz. Beat aussuchen, Mail schicken, ich antworte mit der Lizenz. Danach gehört er dir allein und ist hier als verkauft markiert.</p>
+        <div class="tally" id="tally" aria-live="polite"></div>
+        <dl class="facts">
+          <div><dt class="num">CHF 200</dt><dd>pro Beat, ab zwei Beats CHF 170 pro Beat</dd></div>
+          <div><dt class="num">100%</dt><dd>der Masterrechte bleiben bei dir</dd></div>
+          <div><dt>WAV 24-bit</dt><dd>plus MP3, ohne Tag</dd></div>
+          <div><dt class="num">3</dt><dd>Revisionsrunden pro Beat inklusive</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <div class="toolbar" id="store">
+      <div class="wrap">
+        <div class="chips" id="chips" role="group" aria-label="Nach Stimmung filtern"></div>
+        <div class="tools">
+          <input id="q" type="search" placeholder="Beats suchen" aria-label="Beats suchen" />
+          <select id="sort" aria-label="Sortieren">
+            <option value="new">Neueste</option>
+            <option value="bpm-asc">BPM aufsteigend</option>
+            <option value="bpm-desc">BPM absteigend</option>
+            <option value="name">A bis Z</option>
+          </select>
+          <label class="only"><input type="checkbox" id="only" /> Nur verfügbare</label>
+        </div>
+      </div>
+    </div>
+
+    <section class="list" aria-label="Beats">
+      <div class="wrap">
+        <div class="row head" aria-hidden="true"><span></span><span>Beat</span><span>Stimmung</span><span>BPM</span><span>Vorschau</span><span class="r">Preis</span><span></span></div>
+        <div id="rows">
+          <div class="skel"><i></i><i></i></div>
+          <div class="skel"><i></i><i></i></div>
+          <div class="skel"><i></i><i></i></div>
+          <div class="skel"><i></i><i></i></div>
+          <noscript><p class="error">Der Beat-Store braucht JavaScript. Schreib mir an <a href="mailto:mail@vaynex.ch">mail@vaynex.ch</a>, dann schicke ich dir die Liste.</p></noscript>
+        </div>
+      </div>
+    </section>
+
+    <section class="how">
+      <div class="wrap">
+        <div>
+          <div class="eyebrow">So kaufst du</div>
+          <h2>Von der Vorschau zu deinen Dateien in vier Schritten.</h2>
+        </div>
+        <ol class="steps">
+          <li><h3>Anhören und wählen</h3><p>Die Vorschauen haben einen Voice-Tag. Die Dateien, die du kaufst, nicht.</p></li>
+          <li><h3>Mail schicken</h3><p>Kaufen öffnet eine Mail, der Beat steht schon drin. Ergänze deinen Artist-Namen und wofür du ihn brauchst.</p></li>
+          <li><h3>Lizenz unterschreiben</h3><p>Ich antworte persönlich mit dem Exklusiv-Lizenzvertrag und den Zahlungsangaben.</p></li>
+          <li><h3>Dateien bekommen</h3><p>WAV und MP3 ohne Tag. Der Beat ist danach für immer als verkauft markiert.</p></li>
+        </ol>
+        <p class="more">Lieber einen Beat, der um deinen Song herum entsteht? Schau dir die <a href="/de/#packages">Packages</a> an.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap foot">
+      <a href="/de/" class="brand" aria-label="Vaynex Startseite"><img src="/images/logo-light.png" alt="Vaynex" /></a>
+      <div class="foot-links">
+        <a href="/de/">vaynex.ch</a>
+        <a href="/de/#packages">Packages</a>
+        <a href="/de/coffee/">Virtual Coffee</a>
+        <a href="https://www.instagram.com/vaynex061" target="_blank" rel="noopener">Instagram</a>
+        <a href="/impressum.html">Impressum</a>
+      </div>
+      <small>© 2026 Vaynex · Uncompromising Boom-Bap Beats</small>
+    </div>
+  </footer>
+
+  <div class="player" id="player" aria-label="Player" hidden>
+    <div class="wrap">
+      <div class="thin"><i id="thin"></i></div>
+      <div class="now">
+        <span class="cover" id="pCover"></span>
+        <div class="txt"><b id="pName"></b><span id="pMeta"></span></div>
+      </div>
+      <div class="ctrl">
+        <button class="icon-btn skip" type="button" id="prev" aria-label="Vorheriger Beat"><svg viewBox="0 0 24 24"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+        <button class="play-btn" type="button" id="play" aria-label="Abspielen"><svg viewBox="0 0 24 24" id="playIcon"><path d="M7 4.5v15l13-7.5z"/></svg></button>
+        <button class="icon-btn skip" type="button" id="next" aria-label="Nächster Beat"><svg viewBox="0 0 24 24"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
+      </div>
+      <div class="scrub">
+        <span class="num" id="tCur">0:00</span>
+        <div class="wave" id="pWave"></div>
+        <span class="num" id="tDur">0:00</span>
+      </div>
+      <button class="buy" type="button" id="pBuy"><span class="long">Kaufen</span><span class="short">Kaufen</span></button>
+    </div>
+  </div>
+
+  <div class="sheet-bg" id="sheet" hidden>
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sTitle">
+      <div class="sheet-head">
+        <span class="cover" id="sCover"></span>
+        <div><h2 id="sTitle"></h2><p id="sMeta"></p></div>
+      </div>
+      <div class="sheet-body">
+        <ul>
+          <li>Exklusivlizenz, der Beat wird nur einmal verkauft</li>
+          <li>100% der Masterrechte, WAV 24-bit und MP3 ohne Tag</li>
+          <li>Deine Mail öffnet sich mit dem Beat, ich antworte persönlich mit der Lizenz</li>
+        </ul>
+        <div class="fallback">
+          <span>Keine Mail-App? Schreib an <b>mail@vaynex.ch</b> mit dem Beat-Namen.</span>
+          <button class="linkish" type="button" id="sCopy">Adresse kopieren</button>
+        </div>
+      </div>
+      <div class="sheet-foot">
+        <button class="btn-ghost" type="button" id="sClose">Schliessen</button>
+        <a class="buy" id="sGo" href="mailto:mail@vaynex.ch">Mail schreiben</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="/beats/store.js" defer></script>
+</body>
+</html>
