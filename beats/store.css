@@ -291,4 +291,7 @@ footer.site { border-top: 1px solid var(--line); padding: 34px 0; }
 .btn-ghost { border: 1px solid var(--line-strong); background: transparent; border-radius: 8px; height: 40px; padding: 0 16px; cursor: pointer; font-weight: 500; }
 .sheet-foot .buy { height: 40px; }
 
+/* Cookie-Symbol (CookieYes) über den Player heben, sonst liegt es auf dem Cover */
+body.has-player .cky-btn-revisit-wrapper { bottom: calc(var(--player-h) + env(safe-area-inset-bottom, 0px) + 12px) !important; }
+
 .toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(var(--player-h) + env(safe-area-inset-bottom, 0px) + 16px); z-index: 70; background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 8px; font-size: 14px; font-weight: 500; max-width: calc(100% - 32px); overflow-wrap: anywhere; }
