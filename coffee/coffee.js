@@ -1,4 +1,4 @@
-// Virtual Coffee landing page, shared by /coffee/, /de/coffee/, /it/coffee/ and /fr/coffee/
+// Virtual Coffee landing page, shared by /coffee/ and /de/coffee/ (no IT/FR version, the call is English or German)
 (function () {
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
