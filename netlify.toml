@@ -17,3 +17,13 @@
   from = "/de/*"
   to = "/de/404.html"
   status = 404
+
+[[redirects]]
+  from = "/it/*"
+  to = "/it/404.html"
+  status = 404
+
+[[redirects]]
+  from = "/fr/*"
+  to = "/fr/404.html"
+  status = 404

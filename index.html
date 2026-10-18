@@ -22,6 +22,8 @@
 
   <link rel="alternate" hreflang="en" href="https://www.vaynex.ch/" />
   <link rel="alternate" hreflang="de" href="https://www.vaynex.ch/de/" />
+  <link rel="alternate" hreflang="it" href="https://www.vaynex.ch/it/" />
+  <link rel="alternate" hreflang="fr" href="https://www.vaynex.ch/fr/" />
   <link rel="alternate" hreflang="x-default" href="https://www.vaynex.ch/" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -276,6 +278,8 @@
     .foot a:hover { color:var(--ink); }
     .foot small { color:var(--muted); font-size:13px; }
 
+    /* Four languages make the nav longer, tighten it before the burger menu takes over */
+    @media (max-width: 1000px) { .nav-links { gap: 16px; } }
     @media (max-width: 860px) {
       .about-grid, .book-grid { grid-template-columns: 1fr; gap:36px; }
       .releases { grid-template-columns: 1fr; }
@@ -313,8 +317,10 @@
             <span>EN</span><span class="caret">▾</span>
           </button>
           <div class="lang-menu" id="langMenu" role="menu">
-            <a href="/" class="active">English</a>
-            <a href="/de/">Deutsch</a>
+            <a href="/" class="active" aria-current="page">English</a>
+            <a href="/de/" hreflang="de" lang="de">Deutsch</a>
+            <a href="/it/" hreflang="it" lang="it">Italiano</a>
+            <a href="/fr/" hreflang="fr" lang="fr">Français</a>
           </div>
         </div>
       </nav>

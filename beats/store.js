@@ -1,4 +1,4 @@
-/* Beat Store, shared by /beats/ and /de/beats/.
+/* Beat Store, shared by /beats/, /de/beats/, /it/beats/ and /fr/beats/ (texts per <html lang>).
    The beat list is beats.json on the Bunny CDN, published by the Vaynex app ("Live stellen").
    Paths inside it (covers, previews) are relative to the file. Buying is an email to Vaynex, no checkout. */
 (() => {
@@ -9,37 +9,74 @@
   const MOOD_ORDER = ['Soul', 'Industrial', 'Orchestral', 'Dissonant'];
   // NEW flag: days since the beat came into the store ("added", set by the app). Same number as BeatStore.newDays in the app.
   const NEW_DAYS = 30;
+  // Stamp on sold covers stays English in every language: longer words (VERKAUFT, VENDUTO) do not fit the 52px cover
+  const STAMP = 'SOLD';
 
-  const de = (document.documentElement.lang || '').toLowerCase().startsWith('de');
-  const T = de ? {
-    all: 'Alle', new: 'Neu', buy: 'Kaufen', ask: 'Anfragen', reserved: 'Reserviert', sold: 'Verkauft',
-    tally: (n, a, r, s) => [`<b>${n}</b> Beats`, `<span class="dot available"></span>${a} verfügbar`,
-      r ? `<span class="dot reserved"></span>${r} reserviert` : '', s ? `<span class="dot sold"></span>${s} verkauft` : ''],
-    preview: 'Vorschau mit Voice-Tag', soldLine: 'Exklusiv verkauft',
-    play: name => `${name} abspielen`, pause: 'Pause', copyLink: name => `Link zu ${name} kopieren`,
-    copied: 'Link kopiert', addressCopied: 'Adresse kopiert',
-    noMatch: 'Kein Beat passt dazu.', showAll: 'Alle Beats zeigen',
-    loadError: 'Die Beats liessen sich gerade nicht laden. Lade die Seite neu oder schreib mir an',
-    audioError: 'Die Vorschau lädt gerade nicht. Versuch es gleich nochmals.',
-    subject: b => `Beat-Lizenz: ${b.name} (${b.bpm} BPM)`,
-    body: (b, url) => `Hallo Vaynex\n\nIch möchte die Exklusivlizenz für "${b.name}" (${b.bpm} BPM, CHF ${b.price}) kaufen.\n${url}\n\nArtist-Name:\nInstagram oder Spotify:\nWofür (Single, EP, Video …):\n\nDanke!`,
-    askSubject: b => `Reservierter Beat: ${b.name}`,
-    askBody: (b, url) => `Hallo Vaynex\n\n"${b.name}" ist als reserviert markiert. Falls er wieder frei wird, sag mir bitte Bescheid.\n${url}\n\nArtist-Name:\nInstagram oder Spotify:\n\nDanke!`
-  } : {
-    all: 'All', new: 'New', buy: 'Buy', ask: 'Ask', reserved: 'Reserved', sold: 'Sold',
-    tally: (n, a, r, s) => [`<b>${n}</b> beats`, `<span class="dot available"></span>${a} available`,
-      r ? `<span class="dot reserved"></span>${r} reserved` : '', s ? `<span class="dot sold"></span>${s} sold` : ''],
-    preview: 'Preview with voice tag', soldLine: 'Exclusive, sold',
-    play: name => `Play ${name}`, pause: 'Pause', copyLink: name => `Copy link to ${name}`,
-    copied: 'Link copied', addressCopied: 'Address copied',
-    noMatch: 'No beats match that.', showAll: 'Show all beats',
-    loadError: "The beats didn't load right now. Reload the page or write to",
-    audioError: "This preview didn't load. Try again in a moment.",
-    subject: b => `Beat license: ${b.name} (${b.bpm} BPM)`,
-    body: (b, url) => `Hi Vaynex,\n\nI'd like to buy the exclusive license for "${b.name}" (${b.bpm} BPM, CHF ${b.price}).\n${url}\n\nArtist name:\nInstagram or Spotify:\nWhat it's for (single, EP, video ...):\n\nThanks!`,
-    askSubject: b => `Reserved beat: ${b.name}`,
-    askBody: (b, url) => `Hi Vaynex,\n\n"${b.name}" is marked reserved. If it becomes available again, please let me know.\n${url}\n\nArtist name:\nInstagram or Spotify:\n\nThanks!`
+  const pl = (k, one, many) => k === 1 ? one : many;
+  const TEXT = {
+    de: {
+      all: 'Alle', new: 'Neu', buy: 'Kaufen', ask: 'Anfragen', reserved: 'Reserviert', sold: 'Verkauft',
+      tally: (n, a, r, s) => [`<b>${n}</b> Beats`, `<span class="dot available"></span>${a} verfügbar`,
+        r ? `<span class="dot reserved"></span>${r} reserviert` : '', s ? `<span class="dot sold"></span>${s} verkauft` : ''],
+      preview: 'Vorschau mit Voice-Tag', soldLine: 'Exklusiv verkauft',
+      play: name => `${name} abspielen`, pause: 'Pause', copyLink: name => `Link zu ${name} kopieren`,
+      copied: 'Link kopiert', addressCopied: 'Adresse kopiert',
+      noMatch: 'Kein Beat passt dazu.', showAll: 'Alle Beats zeigen',
+      loadError: 'Die Beats liessen sich gerade nicht laden. Lade die Seite neu oder schreib mir an',
+      audioError: 'Die Vorschau lädt gerade nicht. Versuch es gleich nochmals.',
+      subject: b => `Beat-Lizenz: ${b.name} (${b.bpm} BPM)`,
+      body: (b, url) => `Hallo Vaynex\n\nIch möchte die Exklusivlizenz für "${b.name}" (${b.bpm} BPM, CHF ${b.price}) kaufen.\n${url}\n\nArtist-Name:\nInstagram oder Spotify:\nWofür (Single, EP, Video …):\n\nDanke!`,
+      askSubject: b => `Reservierter Beat: ${b.name}`,
+      askBody: (b, url) => `Hallo Vaynex\n\n"${b.name}" ist als reserviert markiert. Falls er wieder frei wird, sag mir bitte Bescheid.\n${url}\n\nArtist-Name:\nInstagram oder Spotify:\n\nDanke!`
+    },
+    it: {
+      all: 'Tutti', new: 'Nuovo', buy: 'Compra', ask: 'Chiedi', reserved: 'Riservato', sold: 'Venduto',
+      tally: (n, a, r, s) => [`<b>${n}</b> beat`, `<span class="dot available"></span>${a} ${pl(a, 'disponibile', 'disponibili')}`,
+        r ? `<span class="dot reserved"></span>${r} ${pl(r, 'riservato', 'riservati')}` : '', s ? `<span class="dot sold"></span>${s} ${pl(s, 'venduto', 'venduti')}` : ''],
+      preview: 'Anteprima con voice tag', soldLine: 'Venduto in esclusiva',
+      play: name => `Ascolta ${name}`, pause: 'Pausa', copyLink: name => `Copia il link di ${name}`,
+      copied: 'Link copiato', addressCopied: 'Indirizzo copiato',
+      noMatch: 'Nessun beat corrisponde.', showAll: 'Mostra tutti i beat',
+      loadError: 'Al momento i beat non si caricano. Ricarica la pagina o scrivimi a',
+      audioError: 'Questa anteprima non si carica. Riprova tra un attimo.',
+      subject: b => `Licenza beat: ${b.name} (${b.bpm} BPM)`,
+      body: (b, url) => `Ciao Vaynex,\n\nvorrei acquistare la licenza esclusiva per "${b.name}" (${b.bpm} BPM, CHF ${b.price}).\n${url}\n\nNome d’arte:\nInstagram o Spotify:\nPer cosa (singolo, EP, video ...):\n\nGrazie!`,
+      askSubject: b => `Beat riservato: ${b.name}`,
+      askBody: (b, url) => `Ciao Vaynex,\n\n"${b.name}" risulta riservato. Se torna disponibile, fammelo sapere.\n${url}\n\nNome d’arte:\nInstagram o Spotify:\n\nGrazie!`
+    },
+    fr: {
+      all: 'Tous', new: 'Nouveau', buy: 'Acheter', ask: 'Demander', reserved: 'Réservé', sold: 'Vendu',
+      tally: (n, a, r, s) => [`<b>${n}</b> ${pl(n, 'beat', 'beats')}`, `<span class="dot available"></span>${a} ${pl(a, 'disponible', 'disponibles')}`,
+        r ? `<span class="dot reserved"></span>${r} ${pl(r, 'réservé', 'réservés')}` : '', s ? `<span class="dot sold"></span>${s} ${pl(s, 'vendu', 'vendus')}` : ''],
+      preview: 'Extrait avec voice tag', soldLine: 'Vendu en exclusivité',
+      play: name => `Écouter ${name}`, pause: 'Pause', copyLink: name => `Copier le lien vers ${name}`,
+      copied: 'Lien copié', addressCopied: 'Adresse copiée',
+      noMatch: 'Aucun beat ne correspond.', showAll: 'Afficher tous les beats',
+      loadError: 'Les beats ne se chargent pas pour le moment. Recharge la page ou écris-moi à',
+      audioError: 'Cet extrait ne se charge pas. Réessaie dans un instant.',
+      subject: b => `Licence beat : ${b.name} (${b.bpm} BPM)`,
+      body: (b, url) => `Salut Vaynex,\n\nJe voudrais acheter la licence exclusive pour "${b.name}" (${b.bpm} BPM, CHF ${b.price}).\n${url}\n\nNom d’artiste :\nInstagram ou Spotify :\nPour quoi (single, EP, clip ...) :\n\nMerci !`,
+      askSubject: b => `Beat réservé : ${b.name}`,
+      askBody: (b, url) => `Salut Vaynex,\n\n"${b.name}" est marqué comme réservé. S’il redevient disponible, préviens-moi.\n${url}\n\nNom d’artiste :\nInstagram ou Spotify :\n\nMerci !`
+    },
+    en: {
+      all: 'All', new: 'New', buy: 'Buy', ask: 'Ask', reserved: 'Reserved', sold: 'Sold',
+      tally: (n, a, r, s) => [`<b>${n}</b> beats`, `<span class="dot available"></span>${a} available`,
+        r ? `<span class="dot reserved"></span>${r} reserved` : '', s ? `<span class="dot sold"></span>${s} sold` : ''],
+      preview: 'Preview with voice tag', soldLine: 'Exclusive, sold',
+      play: name => `Play ${name}`, pause: 'Pause', copyLink: name => `Copy link to ${name}`,
+      copied: 'Link copied', addressCopied: 'Address copied',
+      noMatch: 'No beats match that.', showAll: 'Show all beats',
+      loadError: "The beats didn't load right now. Reload the page or write to",
+      audioError: "This preview didn't load. Try again in a moment.",
+      subject: b => `Beat license: ${b.name} (${b.bpm} BPM)`,
+      body: (b, url) => `Hi Vaynex,\n\nI'd like to buy the exclusive license for "${b.name}" (${b.bpm} BPM, CHF ${b.price}).\n${url}\n\nArtist name:\nInstagram or Spotify:\nWhat it's for (single, EP, video ...):\n\nThanks!`,
+      askSubject: b => `Reserved beat: ${b.name}`,
+      askBody: (b, url) => `Hi Vaynex,\n\n"${b.name}" is marked reserved. If it becomes available again, please let me know.\n${url}\n\nArtist name:\nInstagram or Spotify:\n\nThanks!`
+    }
   };
+  const lang = (document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
+  const T = TEXT[lang] || TEXT.en;
 
   const $ = id => document.getElementById(id);
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -114,7 +151,7 @@
   function waveBlock(b) { const s = waveSVG(bars(b)); return `<div class="base">${s}</div><div class="top">${s}</div>`; }
   function coverHTML(b, stamp) {
     const img = b.cover ? `<img src="${esc(b.cover)}" alt="" loading="lazy" width="56" height="56">` : `<span class="ph">${esc(b.name)}</span>`;
-    return img + (stamp && b.status === 'sold' ? `<span class="stamp">${esc(T.sold.toUpperCase())}</span>` : '');
+    return img + (stamp && b.status === 'sold' ? `<span class="stamp">${STAMP}</span>` : '');
   }
 
   // ---------- Filters ----------

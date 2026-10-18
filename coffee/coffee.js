@@ -1,4 +1,4 @@
-// Virtual Coffee landing page, shared by /coffee/ and /de/coffee/
+// Virtual Coffee landing page, shared by /coffee/, /de/coffee/, /it/coffee/ and /fr/coffee/
 (function () {
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
