@@ -7,10 +7,12 @@
   const CATALOG = 'https://vaynex.b-cdn.net/store/beats.json';
   const MAIL = 'mail@vaynex.ch';
   const MOOD_ORDER = ['Soul', 'Industrial', 'Orchestral', 'Dissonant'];
+  // NEW flag: days since the beat came into the store ("added", set by the app). Same number as BeatStore.newDays in the app.
+  const NEW_DAYS = 30;
 
   const de = (document.documentElement.lang || '').toLowerCase().startsWith('de');
   const T = de ? {
-    all: 'Alle', buy: 'Kaufen', ask: 'Anfragen', reserved: 'Reserviert', sold: 'Verkauft',
+    all: 'Alle', new: 'Neu', buy: 'Kaufen', ask: 'Anfragen', reserved: 'Reserviert', sold: 'Verkauft',
     tally: (n, a, r, s) => [`<b>${n}</b> Beats`, `<span class="dot available"></span>${a} verfügbar`,
       r ? `<span class="dot reserved"></span>${r} reserviert` : '', s ? `<span class="dot sold"></span>${s} verkauft` : ''],
     preview: 'Vorschau mit Voice-Tag', soldLine: 'Exklusiv verkauft',
@@ -24,7 +26,7 @@
     askSubject: b => `Reservierter Beat: ${b.name}`,
     askBody: (b, url) => `Hallo Vaynex\n\n"${b.name}" ist als reserviert markiert. Falls er wieder frei wird, sag mir bitte Bescheid.\n${url}\n\nArtist-Name:\nInstagram oder Spotify:\n\nDanke!`
   } : {
-    all: 'All', buy: 'Buy', ask: 'Ask', reserved: 'Reserved', sold: 'Sold',
+    all: 'All', new: 'New', buy: 'Buy', ask: 'Ask', reserved: 'Reserved', sold: 'Sold',
     tally: (n, a, r, s) => [`<b>${n}</b> beats`, `<span class="dot available"></span>${a} available`,
       r ? `<span class="dot reserved"></span>${r} reserved` : '', s ? `<span class="dot sold"></span>${s} sold` : ''],
     preview: 'Preview with voice tag', soldLine: 'Exclusive, sold',
@@ -42,6 +44,8 @@
   const $ = id => document.getElementById(id);
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const slugify = s => String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  // Whole days since a YYYY-MM-DD date, counted in the visitor's time zone
+  const daysSince = d => /^\d{4}-\d{2}-\d{2}$/.test(d) ? Math.floor((Date.now() - new Date(d + 'T00:00:00')) / 864e5) : Infinity;
   const fmt = s => (isFinite(s) && s > 0) ? `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}` : '0:00';
 
   // A catalog from elsewhere only on a local test server, never on vaynex.ch
@@ -66,16 +70,19 @@
       i, status,
       id: String(raw.id || ''), name: String(raw.name || ''), bpm: Math.round(+raw.bpm || 0),
       mood: String(raw.mood || ''), tags: Array.isArray(raw.tags) ? raw.tags.map(String) : [],
-      price: Math.round(+raw.price || 0), date: String(raw.date || ''),
+      price: Math.round(+raw.price || 0), date: String(raw.date || ''), added: String(raw.added || ''),
       cover: raw.cover ? new URL(raw.cover, catalogURL).href : '',
       audio: raw.audio && status !== 'sold' ? new URL(raw.audio, catalogURL).href : '',
       dur: +raw.duration || 0,
       peaks: Array.isArray(raw.peaks) && raw.peaks.length ? raw.peaks.map(Number) : null
     };
     if (!b.id) b.id = slugify(b.name);
+    b.isNew = status !== 'sold' && daysSince(b.added) < NEW_DAYS;
     return b;
   }
   const playable = b => !!b.audio;
+  // Newest first: latest into the store, then by production date. Beats from the launch have no "added".
+  const newest = (a, b) => b.added.localeCompare(a.added) || b.date.localeCompare(a.date) || a.name.localeCompare(b.name);
   const meta = b => [b.bpm ? b.bpm + ' BPM' : '', b.mood].filter(Boolean).join(' · ');
   const shareURL = b => location.origin + location.pathname + '#' + b.id;
 
@@ -140,7 +147,7 @@
       s === 'bpm-asc' ? a.bpm - b.bpm || a.name.localeCompare(b.name) :
       s === 'bpm-desc' ? b.bpm - a.bpm || a.name.localeCompare(b.name) :
       s === 'name' ? a.name.localeCompare(b.name) :
-      b.date.localeCompare(a.date) || a.name.localeCompare(b.name));
+      newest(a, b));
     if (!visible.length) {
       rowsEl.innerHTML = `<p class="empty">${esc(T.noMatch)} <button type="button" id="clear">${esc(T.showAll)}</button></p>`;
       return;
@@ -167,7 +174,7 @@
     return `
       <div class="row beat ${b.status}" id="${esc(b.id)}" data-i="${b.i}">
         ${cover}
-        <div class="title"><b><span class="nm">${esc(b.name)}</span><span class="eq" hidden><i></i><i></i><i></i></span></b><span class="meta num">${esc([meta(b), statusText].filter(Boolean).join(' · '))}</span></div>
+        <div class="title"><b><span class="nm">${esc(b.name)}</span>${b.isNew ? `<span class="new">${esc(T.new)}</span>` : ''}<span class="eq" hidden><i></i><i></i><i></i></span></b><span class="meta num">${esc([meta(b), statusText].filter(Boolean).join(' · '))}</span></div>
         <span class="mood">${esc(b.mood)}</span>
         <span class="bpm num">${b.bpm || ''}</span>
         ${wave}
@@ -366,7 +373,7 @@
     renderTally();
     renderChips();
     renderRows();
-    const first = beats.filter(playable).sort((a, b) => b.date.localeCompare(a.date))[0];
+    const first = beats.filter(playable).sort(newest)[0];
     if (first) {
       player.hidden = false;
       document.body.classList.add('has-player');
