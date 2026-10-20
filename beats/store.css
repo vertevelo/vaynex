@@ -106,7 +106,7 @@ header.site {
 .list .wrap { padding-top: 8px; padding-bottom: 48px; }
 .row {
   display: grid;
-  grid-template-columns: 56px minmax(0, 1.3fr) 104px 56px minmax(110px, 1.7fr) 92px auto;
+  grid-template-columns: 56px minmax(0, 1.3fr) 104px 56px minmax(110px, 1.7fr) 92px 192px;
   gap: 16px; align-items: center;
   padding: 10px 8px; border-bottom: 1px solid var(--line);
 }

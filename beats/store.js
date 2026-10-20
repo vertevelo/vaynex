@@ -15,7 +15,7 @@
   const pl = (k, one, many) => k === 1 ? one : many;
   const TEXT = {
     de: {
-      all: 'Alle', new: 'Neu', buy: 'Kaufen', ask: 'Anfragen', reserved: 'Reserviert', sold: 'Verkauft',
+      all: 'Alle', new: 'Neu', buy: 'Preis anfragen', buyShort: 'Preis', ask: 'Anfragen', reserved: 'Reserviert', sold: 'Verkauft',
       tally: (n, a, r, s) => [`<b>${n}</b> Beats`, `<span class="dot available"></span>${a} verfügbar`,
         r ? `<span class="dot reserved"></span>${r} reserviert` : '', s ? `<span class="dot sold"></span>${s} verkauft` : ''],
       preview: 'Vorschau mit Voice-Tag', soldLine: 'Exklusiv verkauft',
@@ -24,13 +24,13 @@
       noMatch: 'Kein Beat passt dazu.', showAll: 'Alle Beats zeigen',
       loadError: 'Die Beats liessen sich gerade nicht laden. Lade die Seite neu oder schreib mir an',
       audioError: 'Die Vorschau lädt gerade nicht. Versuch es gleich nochmals.',
-      subject: b => `Beat-Lizenz: ${b.name} (${b.bpm} BPM)`,
-      body: (b, url) => `Hallo Vaynex\n\nIch möchte die Exklusivlizenz für "${b.name}" (${b.bpm} BPM, CHF ${b.price}) kaufen.\n${url}\n\nArtist-Name:\nInstagram oder Spotify:\nWofür (Single, EP, Video …):\n\nDanke!`,
+      subject: b => `Preisanfrage: ${b.name} (${b.bpm} BPM)`,
+      body: (b, url) => `Hallo Vaynex\n\nIch interessiere mich für die Exklusivlizenz für "${b.name}" (${b.bpm} BPM). Was kostet der Beat?\n${url}\n\nArtist-Name:\nInstagram oder Spotify:\nWofür (Single, EP, Video …):\n\nDanke!`,
       askSubject: b => `Reservierter Beat: ${b.name}`,
       askBody: (b, url) => `Hallo Vaynex\n\n"${b.name}" ist als reserviert markiert. Falls er wieder frei wird, sag mir bitte Bescheid.\n${url}\n\nArtist-Name:\nInstagram oder Spotify:\n\nDanke!`
     },
     it: {
-      all: 'Tutti', new: 'Nuovo', buy: 'Compra', ask: 'Chiedi', reserved: 'Riservato', sold: 'Venduto',
+      all: 'Tutti', new: 'Nuovo', buy: 'Chiedi il prezzo', buyShort: 'Prezzo', ask: 'Chiedi', reserved: 'Riservato', sold: 'Venduto',
       tally: (n, a, r, s) => [`<b>${n}</b> beat`, `<span class="dot available"></span>${a} ${pl(a, 'disponibile', 'disponibili')}`,
         r ? `<span class="dot reserved"></span>${r} ${pl(r, 'riservato', 'riservati')}` : '', s ? `<span class="dot sold"></span>${s} ${pl(s, 'venduto', 'venduti')}` : ''],
       preview: 'Anteprima con voice tag', soldLine: 'Venduto in esclusiva',
@@ -39,13 +39,13 @@
       noMatch: 'Nessun beat corrisponde.', showAll: 'Mostra tutti i beat',
       loadError: 'Al momento i beat non si caricano. Ricarica la pagina o scrivimi a',
       audioError: 'Questa anteprima non si carica. Riprova tra un attimo.',
-      subject: b => `Licenza beat: ${b.name} (${b.bpm} BPM)`,
-      body: (b, url) => `Ciao Vaynex,\n\nvorrei acquistare la licenza esclusiva per "${b.name}" (${b.bpm} BPM, CHF ${b.price}).\n${url}\n\nNome d’arte:\nInstagram o Spotify:\nPer cosa (singolo, EP, video ...):\n\nGrazie!`,
+      subject: b => `Richiesta prezzo: ${b.name} (${b.bpm} BPM)`,
+      body: (b, url) => `Ciao Vaynex,\n\nmi interessa la licenza esclusiva per "${b.name}" (${b.bpm} BPM). Quanto costa?\n${url}\n\nNome d’arte:\nInstagram o Spotify:\nPer cosa (singolo, EP, video ...):\n\nGrazie!`,
       askSubject: b => `Beat riservato: ${b.name}`,
       askBody: (b, url) => `Ciao Vaynex,\n\n"${b.name}" risulta riservato. Se torna disponibile, fammelo sapere.\n${url}\n\nNome d’arte:\nInstagram o Spotify:\n\nGrazie!`
     },
     fr: {
-      all: 'Tous', new: 'Nouveau', buy: 'Acheter', ask: 'Demander', reserved: 'Réservé', sold: 'Vendu',
+      all: 'Tous', new: 'Nouveau', buy: 'Demander le prix', buyShort: 'Prix', ask: 'Demander', reserved: 'Réservé', sold: 'Vendu',
       tally: (n, a, r, s) => [`<b>${n}</b> ${pl(n, 'beat', 'beats')}`, `<span class="dot available"></span>${a} ${pl(a, 'disponible', 'disponibles')}`,
         r ? `<span class="dot reserved"></span>${r} ${pl(r, 'réservé', 'réservés')}` : '', s ? `<span class="dot sold"></span>${s} ${pl(s, 'vendu', 'vendus')}` : ''],
       preview: 'Extrait avec voice tag', soldLine: 'Vendu en exclusivité',
@@ -54,13 +54,13 @@
       noMatch: 'Aucun beat ne correspond.', showAll: 'Afficher tous les beats',
       loadError: 'Les beats ne se chargent pas pour le moment. Recharge la page ou écris-moi à',
       audioError: 'Cet extrait ne se charge pas. Réessaie dans un instant.',
-      subject: b => `Licence beat : ${b.name} (${b.bpm} BPM)`,
-      body: (b, url) => `Salut Vaynex,\n\nJe voudrais acheter la licence exclusive pour "${b.name}" (${b.bpm} BPM, CHF ${b.price}).\n${url}\n\nNom d’artiste :\nInstagram ou Spotify :\nPour quoi (single, EP, clip ...) :\n\nMerci !`,
+      subject: b => `Demande de prix : ${b.name} (${b.bpm} BPM)`,
+      body: (b, url) => `Salut Vaynex,\n\nLa licence exclusive pour "${b.name}" (${b.bpm} BPM) m’intéresse. Quel est le prix ?\n${url}\n\nNom d’artiste :\nInstagram ou Spotify :\nPour quoi (single, EP, clip ...) :\n\nMerci !`,
       askSubject: b => `Beat réservé : ${b.name}`,
       askBody: (b, url) => `Salut Vaynex,\n\n"${b.name}" est marqué comme réservé. S’il redevient disponible, préviens-moi.\n${url}\n\nNom d’artiste :\nInstagram ou Spotify :\n\nMerci !`
     },
     en: {
-      all: 'All', new: 'New', buy: 'Buy', ask: 'Ask', reserved: 'Reserved', sold: 'Sold',
+      all: 'All', new: 'New', buy: 'Ask for price', buyShort: 'Price', ask: 'Ask', reserved: 'Reserved', sold: 'Sold',
       tally: (n, a, r, s) => [`<b>${n}</b> beats`, `<span class="dot available"></span>${a} available`,
         r ? `<span class="dot reserved"></span>${r} reserved` : '', s ? `<span class="dot sold"></span>${s} sold` : ''],
       preview: 'Preview with voice tag', soldLine: 'Exclusive, sold',
@@ -69,8 +69,8 @@
       noMatch: 'No beats match that.', showAll: 'Show all beats',
       loadError: "The beats didn't load right now. Reload the page or write to",
       audioError: "This preview didn't load. Try again in a moment.",
-      subject: b => `Beat license: ${b.name} (${b.bpm} BPM)`,
-      body: (b, url) => `Hi Vaynex,\n\nI'd like to buy the exclusive license for "${b.name}" (${b.bpm} BPM, CHF ${b.price}).\n${url}\n\nArtist name:\nInstagram or Spotify:\nWhat it's for (single, EP, video ...):\n\nThanks!`,
+      subject: b => `Price request: ${b.name} (${b.bpm} BPM)`,
+      body: (b, url) => `Hi Vaynex,\n\nI'm interested in the exclusive license for "${b.name}" (${b.bpm} BPM). What's the price?\n${url}\n\nArtist name:\nInstagram or Spotify:\nWhat it's for (single, EP, video ...):\n\nThanks!`,
       askSubject: b => `Reserved beat: ${b.name}`,
       askBody: (b, url) => `Hi Vaynex,\n\n"${b.name}" is marked reserved. If it becomes available again, please let me know.\n${url}\n\nArtist name:\nInstagram or Spotify:\n\nThanks!`
     }
@@ -107,7 +107,7 @@
       i, status,
       id: String(raw.id || ''), name: String(raw.name || ''), bpm: Math.round(+raw.bpm || 0),
       mood: String(raw.mood || ''), tags: Array.isArray(raw.tags) ? raw.tags.map(String) : [],
-      price: Math.round(+raw.price || 0), date: String(raw.date || ''), added: String(raw.added || ''),
+      date: String(raw.date || ''), added: String(raw.added || ''),
       cover: raw.cover ? new URL(raw.cover, catalogURL).href : '',
       audio: raw.audio && status !== 'sold' ? new URL(raw.audio, catalogURL).href : '',
       dur: +raw.duration || 0,
@@ -200,13 +200,13 @@
       ? `<button class="cover" type="button" data-act="play" aria-label="${esc(T.play(b.name))}">${coverHTML(b)}<span class="ov"><svg viewBox="0 0 24 24">${PLAY}</svg></span></button>`
       : `<span class="cover">${coverHTML(b, true)}</span>`;
     const wave = playable(b) ? `<div class="wave" data-act="seek">${waveBlock(b)}</div>` : `<span class="soldline">${sold ? esc(T.soldLine) : ''}</span>`;
-    const price = sold ? `<span class="pill sold">${esc(T.sold)}</span>` : reserved ? `<span class="pill reserved">${esc(T.reserved)}</span>` : `CHF ${b.price}`;
+    const price = sold ? `<span class="pill sold">${esc(T.sold)}</span>` : reserved ? `<span class="pill reserved">${esc(T.reserved)}</span>` : '';
     let acts = '';
     if (!sold) {
       acts += `<button class="icon-btn" type="button" data-act="link" aria-label="${esc(T.copyLink(b.name))}" title="${esc(T.copyLink(b.name))}">${LINK}</button>`;
       acts += reserved
         ? `<a class="ask" href="${esc(askHref(b))}">${esc(T.ask)}</a>`
-        : `<button class="buy" type="button" data-act="buy"><span class="long">${esc(T.buy)}</span><span class="short num">CHF ${b.price}</span></button>`;
+        : `<button class="buy" type="button" data-act="buy"><span class="long">${esc(T.buy)}</span><span class="short">${esc(T.buyShort)}</span></button>`;
     }
     return `
       <div class="row beat ${b.status}" id="${esc(b.id)}" data-i="${b.i}">
@@ -285,8 +285,8 @@
       $('play').setAttribute('aria-label', playing ? T.pause : T.play(b.name));
       const pb = $('pBuy');
       pb.hidden = b.status !== 'available';
-      pb.querySelector('.long').textContent = `${T.buy} · CHF ${b.price}`;
-      pb.querySelector('.short').textContent = T.buy;
+      pb.querySelector('.long').textContent = T.buy;
+      pb.querySelector('.short').textContent = T.buyShort;
     }
     pWave.style.setProperty('--p', p);
     $('thin').style.setProperty('--p', p);
@@ -340,7 +340,7 @@
   function openSheet(b) {
     $('sCover').innerHTML = coverHTML(b);
     $('sTitle').textContent = b.name;
-    $('sMeta').textContent = [meta(b), `CHF ${b.price}`].filter(Boolean).join(' · ');
+    $('sMeta').textContent = meta(b);
     $('sGo').href = buyHref(b);
     lastFocus = document.activeElement;
     sheet.hidden = false;
