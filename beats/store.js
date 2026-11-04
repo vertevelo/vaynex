@@ -121,7 +121,11 @@
   // Newest first: latest into the store, then by production date. Beats from the launch have no "added".
   const newest = (a, b) => b.added.localeCompare(a.added) || b.date.localeCompare(a.date) || a.name.localeCompare(b.name);
   const meta = b => [b.bpm ? b.bpm + ' BPM' : '', b.mood].filter(Boolean).join(' · ');
-  const shareURL = b => location.origin + location.pathname + '#' + b.id;
+  // Share links are /beats/<id>/ (edge function netlify/edge-functions/beat-share.js): the link preview shows the beat's cover.
+  // Messengers never send a #fragment, so /beats/#id only ever showed the store. Old #id links still open the beat.
+  const storePath = location.pathname.replace(/beats\/.*$/, 'beats/');
+  const pathBeat = decodeURIComponent((location.pathname.match(/beats\/([a-z0-9-]+)\/?$/) || [])[1] || '');
+  const shareURL = b => location.origin + storePath + b.id + '/';
 
   function mailto(subject, body) {
     return `mailto:${MAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body.replace(/\n/g, '\r\n'))}`;
@@ -416,7 +420,7 @@
       document.body.classList.add('has-player');
       select(first.i);
     }
-    const h = decodeURIComponent(location.hash.slice(1));
+    const h = decodeURIComponent(location.hash.slice(1)) || pathBeat;
     if (h) reveal(h, true);
   }
   function fail() {

@@ -1,5 +1,7 @@
 [build]
   publish = "."
+  # Share pages for single beats (/beats/<id>/ with the cover as link preview), see beat-share.js
+  edge_functions = "netlify/edge-functions"
 
 [[redirects]]
   from = "/contact"
