@@ -185,7 +185,21 @@
     .player iframe { display:block; width:100%; border:0; }
     .releases { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 8px; }
     .spotify-embed { width:100%; height:152px; border:0; border-radius:12px; display:block; }
-    .latest-release { margin-bottom:28px; }
+    /* Release carousel: scroll-snap row, arrows and dots from the script at the end */
+    .rel-carousel { margin-bottom:28px; }
+    .rel-head { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:14px; }
+    .rel-head .singles-label { margin:0; }
+    .rel-arrows { display:flex; gap:8px; }
+    .rel-arrows button { width:38px; height:38px; border-radius:999px; border:1px solid var(--line); background:var(--card); color:var(--ink); font-size:17px; line-height:1; cursor:pointer; transition:border-color .15s, opacity .15s; }
+    .rel-arrows button:hover:not(:disabled) { border-color:var(--ink); }
+    .rel-arrows button:disabled { opacity:.35; cursor:default; }
+    .rel-track { display:flex; gap:20px; overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth; scrollbar-width:none; overscroll-behavior-x:contain; }
+    .rel-track::-webkit-scrollbar { display:none; }
+    .rel-track > .spotify-embed { flex:0 0 calc((100% - 20px) / 2); scroll-snap-align:start; }
+    .rel-dots { display:flex; justify-content:center; gap:8px; margin-top:14px; }
+    .rel-dots button { width:8px; height:8px; padding:0; border:0; border-radius:999px; background:var(--line); cursor:pointer; transition:background .15s, width .15s; }
+    .rel-dots button.on { background:var(--ink); width:20px; }
+    @media (max-width:720px) { .rel-track > .spotify-embed { flex-basis:86%; } }
     .catalog-box { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:26px; margin-top:28px; }
     .catalog-box h3 { font-size:19px; margin:0 0 14px; }
     .catalog-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; }
@@ -601,10 +615,22 @@
           <span class="btn btn-primary">Ouvrir le Beat Store →</span>
         </a>
 
-        <p class="singles-label">Dernières sorties</p>
-        <div class="latest-release releases">
-          <iframe class="spotify-embed" title="nomou Bscheid gä, Brain MC &amp; Vaynex" src="https://open.spotify.com/embed/track/4gPMazsO0N9AO8eOXbOINO" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-          <iframe class="spotify-embed" title="Featicisti, Lando Cabret &amp; Vaynex" src="https://open.spotify.com/embed/track/1pc8ARzL6ZaRJjFEUzJyB4" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+        <div class="rel-carousel">
+          <div class="rel-head">
+            <p class="singles-label">Dernières sorties</p>
+            <div class="rel-arrows">
+              <button type="button" class="rel-prev" aria-label="Sortie précédente">←</button>
+              <button type="button" class="rel-next" aria-label="Sortie suivante">→</button>
+            </div>
+          </div>
+          <div class="rel-track">
+            <iframe class="spotify-embed" title="nomou Bscheid gä, Brain MC &amp; Vaynex" src="https://open.spotify.com/embed/track/4gPMazsO0N9AO8eOXbOINO" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+            <iframe class="spotify-embed" title="Featicisti, Lando Cabret &amp; Vaynex" src="https://open.spotify.com/embed/track/1pc8ARzL6ZaRJjFEUzJyB4" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+            <iframe class="spotify-embed" title="Prima Della Distruzione, Ari Selva feat. Vaynex" src="https://open.spotify.com/embed/album/51wfBjDRMlhyBf1kQGVbop" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+            <iframe class="spotify-embed" title="Il Rabdomante, Ari Selva feat. Vaynex" src="https://open.spotify.com/embed/track/45mPfyAmHdpG3GxQnmsaNg" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+            <iframe class="spotify-embed" title="Hollow District, Vaynex" src="https://open.spotify.com/embed/track/5XL3rJDTImnW8wlpf06HoR" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+          </div>
+          <div class="rel-dots"></div>
         </div>
 
         <div class="album-feature">
@@ -617,13 +643,6 @@
               <a href="https://distrokid.com/hyperfollow/ariselvaandvaynex/camera-di-pressione" target="_blank" rel="noopener" class="btn btn-primary">Écouter l’album →</a>
             </div>
           </div>
-        </div>
-
-        <p class="singles-label">Les singles avant l’album</p>
-        <div class="releases">
-          <iframe class="spotify-embed" title="Prima Della Distruzione, Ari Selva feat. Vaynex" src="https://open.spotify.com/embed/album/51wfBjDRMlhyBf1kQGVbop" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-          <iframe class="spotify-embed" title="Il Rabdomante, Ari Selva feat. Vaynex" src="https://open.spotify.com/embed/track/45mPfyAmHdpG3GxQnmsaNg" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-          <iframe class="spotify-embed" title="Hollow District, Vaynex" src="https://open.spotify.com/embed/track/5XL3rJDTImnW8wlpf06HoR" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
         </div>
       </div>
     </section>
@@ -829,6 +848,33 @@
       langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
     document.addEventListener('click', function () { langMenu.classList.remove('open'); langBtn.setAttribute('aria-expanded','false'); });
+    document.querySelectorAll('.rel-carousel').forEach(function (c) {
+      var track = c.querySelector('.rel-track'), items = track.children;
+      var prev = c.querySelector('.rel-prev'), next = c.querySelector('.rel-next'), dots = c.querySelector('.rel-dots');
+      function step() { return items.length > 1 ? items[1].offsetLeft - items[0].offsetLeft : track.clientWidth; }
+      function go(i) { track.scrollTo({ left: items[i].offsetLeft - items[0].offsetLeft }); }
+      for (var i = 0; i < items.length; i++) {
+        var d = document.createElement('button');
+        d.type = 'button'; d.setAttribute('aria-label', (i + 1) + ' / ' + items.length);
+        d.addEventListener('click', go.bind(null, i));
+        dots.appendChild(d);
+      }
+      function update() {
+        var max = track.scrollWidth - track.clientWidth - 2;
+        var vis = Math.max(1, Math.round(track.clientWidth / step()));
+        var idx = track.scrollLeft >= max ? items.length - vis : Math.round(track.scrollLeft / step());
+        prev.disabled = track.scrollLeft <= 2;
+        next.disabled = track.scrollLeft >= max;
+        for (var j = 0; j < dots.children.length; j++) dots.children[j].classList.toggle('on', j >= idx && j < idx + vis);
+        c.classList.toggle('rel-static', max <= 0);
+      }
+      function cur() { return Math.round(track.scrollLeft / step()); }
+      prev.addEventListener('click', function () { go(Math.max(0, cur() - 1)); });
+      next.addEventListener('click', function () { go(Math.min(items.length - 1, cur() + 1)); });
+      track.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    });
   </script>
 </body>
 </html>
