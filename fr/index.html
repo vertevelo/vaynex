@@ -873,6 +873,30 @@
       next.addEventListener('click', function () { go(Math.min(items.length - 1, cur() + 1)); });
       track.addEventListener('scroll', update, { passive: true });
       window.addEventListener('resize', update);
+      // Slow auto-advance, one card every 6 s, back to the start after the last one.
+      // Pauses on hover, off screen and in a hidden tab, stops for good once someone
+      // uses the carousel or clicks into a player. Off with reduced motion.
+      var stopped = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var hover = false, seen = false;
+      var timer = setInterval(function () {
+        if (stopped || hover || !seen || document.hidden) return;
+        var max = track.scrollWidth - track.clientWidth - 2;
+        go(track.scrollLeft >= max ? 0 : Math.min(items.length - 1, cur() + 1));
+      }, 6000);
+      function stop() { stopped = true; clearInterval(timer); }
+      c.addEventListener('mouseenter', function () { hover = true; });
+      c.addEventListener('mouseleave', function () { hover = false; });
+      prev.addEventListener('click', stop);
+      next.addEventListener('click', stop);
+      dots.addEventListener('click', stop);
+      track.addEventListener('touchstart', stop, { passive: true });
+      track.addEventListener('wheel', function (e) { if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) stop(); }, { passive: true });
+      window.addEventListener('blur', function () {
+        setTimeout(function () { if (track.contains(document.activeElement)) stop(); }, 0);
+      });
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) { seen = es[0].isIntersecting; }, { threshold: 0.5 }).observe(track);
+      } else { seen = true; }
       update();
     });
   </script>
