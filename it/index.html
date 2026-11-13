@@ -199,7 +199,12 @@
     .rel-dots { display:flex; justify-content:center; gap:8px; margin-top:14px; }
     .rel-dots button { width:8px; height:8px; padding:0; border:0; border-radius:999px; background:var(--line); cursor:pointer; transition:background .15s, width .15s; }
     .rel-dots button.on { background:var(--ink); width:20px; }
-    @media (max-width:720px) { .rel-track > .spotify-embed { flex-basis:86%; } }
+    .rel-track > .voice-card { flex:0 0 calc((100% - 20px) / 2); scroll-snap-align:start; }
+    .rel-track > .voice-card.wide { flex-basis:100%; }
+    .voices-head { align-items:flex-end; margin-bottom:28px; }
+    .voices-carousel .rel-track { align-items:flex-start; overflow-y:hidden; transition:height .35s ease; }
+    .voices-head .section-title { margin-bottom:0; }
+    @media (max-width:720px) { .rel-track > .spotify-embed, .rel-track > .voice-card, .rel-track > .voice-card.wide { flex-basis:86%; } }
     .catalog-box { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:26px; margin-top:28px; }
     .catalog-box h3 { font-size:19px; margin:0 0 14px; }
     .catalog-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:10px; }
@@ -697,9 +702,18 @@
     <!-- VOICES -->
     <section id="voices">
       <div class="wrap">
-        <div class="section-label">Voci</div>
-        <h2 class="section-title">Cosa dicono gli artisti.</h2>
-        <div class="voices-grid">
+        <div class="rel-carousel voices-carousel" data-interval="9000">
+          <div class="rel-head voices-head">
+            <div>
+              <div class="section-label">Voci</div>
+              <h2 class="section-title">Cosa dicono gli artisti.</h2>
+            </div>
+            <div class="rel-arrows">
+              <button type="button" class="rel-prev" aria-label="Voce precedente">←</button>
+              <button type="button" class="rel-next" aria-label="Voce successiva">→</button>
+            </div>
+          </div>
+          <div class="rel-track">
           <div class="voice-card">
             <div class="voice-head">
               <img src="../images/avatar-ari.png" alt="Ari Selva" />
@@ -743,6 +757,8 @@
               <p class="voice-translation">Sinceramente, mi sono innamorato dei beat di Vaynex. Dal primo ascolto mi sono detto: è con lui che voglio lavorare. Le sue batterie hanno quel vibe newyorkese anni 90 che adoro, con una vera identità dietro. Non parliamo nemmeno la stessa lingua, ma ci siamo capiti subito. Non servono grandi discorsi quando si condivide la stessa cultura: l’hip-hop è un linguaggio universale. Romandi, se cercate un beatmaker svizzero con sound e carattere, andate ad ascoltare Vaynex. Siete nel posto giusto.</p>
             </div>
           </div>
+          </div>
+          <div class="rel-dots"></div>
         </div>
       </div>
     </section>
@@ -852,38 +868,48 @@
     document.querySelectorAll('.rel-carousel').forEach(function (c) {
       var track = c.querySelector('.rel-track'), items = track.children;
       var prev = c.querySelector('.rel-prev'), next = c.querySelector('.rel-next'), dots = c.querySelector('.rel-dots');
-      function step() { return items.length > 1 ? items[1].offsetLeft - items[0].offsetLeft : track.clientWidth; }
-      function go(i) { track.scrollTo({ left: items[i].offsetLeft - items[0].offsetLeft }); }
+      var fit = c.classList.contains('voices-carousel');
+      function pos(i) { return items[i].offsetLeft - items[0].offsetLeft; }
+      function go(i) { track.scrollTo({ left: pos(i) }); }
+      function cur() {
+        var best = 0;
+        for (var i = 1; i < items.length; i++) if (Math.abs(pos(i) - track.scrollLeft) < Math.abs(pos(best) - track.scrollLeft)) best = i;
+        return best;
+      }
       for (var i = 0; i < items.length; i++) {
         var d = document.createElement('button');
         d.type = 'button'; d.setAttribute('aria-label', (i + 1) + ' / ' + items.length);
         d.addEventListener('click', go.bind(null, i));
         dots.appendChild(d);
       }
+      function atEnd() { return track.scrollLeft >= track.scrollWidth - track.clientWidth - 2; }
       function update() {
-        var max = track.scrollWidth - track.clientWidth - 2;
-        var vis = Math.max(1, Math.round(track.clientWidth / step()));
-        var idx = track.scrollLeft >= max ? items.length - vis : Math.round(track.scrollLeft / step());
         prev.disabled = track.scrollLeft <= 2;
-        next.disabled = track.scrollLeft >= max;
-        for (var j = 0; j < dots.children.length; j++) dots.children[j].classList.toggle('on', j >= idx && j < idx + vis);
-        c.classList.toggle('rel-static', max <= 0);
+        next.disabled = atEnd();
+        var tallest = 0;
+        for (var j = 0; j < items.length; j++) {
+          var left = pos(j) - track.scrollLeft, right = left + items[j].offsetWidth;
+          var on = left >= -10 && right <= track.clientWidth + 10;
+          dots.children[j].classList.toggle('on', on);
+          if (on) tallest = Math.max(tallest, items[j].offsetHeight);
+        }
+        // Voices differ a lot in length: the row takes the height of the cards in view
+        if (fit && tallest) track.style.height = tallest + 'px';
       }
-      function cur() { return Math.round(track.scrollLeft / step()); }
       prev.addEventListener('click', function () { go(Math.max(0, cur() - 1)); });
       next.addEventListener('click', function () { go(Math.min(items.length - 1, cur() + 1)); });
       track.addEventListener('scroll', update, { passive: true });
       window.addEventListener('resize', update);
-      // Slow auto-advance, one card every 6 s, back to the start after the last one.
+      if (fit && 'ResizeObserver' in window) { var ro = new ResizeObserver(update); for (var k = 0; k < items.length; k++) ro.observe(items[k]); }
+      // Slow auto-advance (data-interval in ms), back to the start after the last card.
       // Pauses on hover, off screen and in a hidden tab, stops for good once someone
       // uses the carousel or clicks into a player. Off with reduced motion.
       var stopped = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var hover = false, seen = false;
       var timer = setInterval(function () {
         if (stopped || hover || !seen || document.hidden) return;
-        var max = track.scrollWidth - track.clientWidth - 2;
-        go(track.scrollLeft >= max ? 0 : Math.min(items.length - 1, cur() + 1));
-      }, 6000);
+        go(atEnd() ? 0 : Math.min(items.length - 1, cur() + 1));
+      }, +c.getAttribute('data-interval') || 6000);
       function stop() { stopped = true; clearInterval(timer); }
       c.addEventListener('mouseenter', function () { hover = true; });
       c.addEventListener('mouseleave', function () { hover = false; });
