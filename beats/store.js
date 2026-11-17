@@ -1,6 +1,7 @@
 /* Beat Store, shared by /beats/, /de/beats/, /it/beats/ and /fr/beats/ (texts per <html lang>).
    The beat list is beats.json on the Bunny CDN, published by the Vaynex app ("Live stellen").
-   Paths inside it (covers, previews) are relative to the file. Buying is an email to Vaynex, no checkout. */
+   Paths inside it (covers, previews) are relative to the file. No checkout: "Ask for price" (and "Ask" on reserved beats)
+   sends the Netlify form "price-request" from the sheet, Netlify mails it to Vaynex. No mail app needed. */
 (() => {
   'use strict';
 
@@ -25,9 +26,7 @@
       loadError: 'Die Beats liessen sich gerade nicht laden. Lade die Seite neu oder schreib mir an',
       audioError: 'Die Vorschau lädt gerade nicht. Versuch es gleich nochmals.',
       subject: b => `Preisanfrage: ${b.name} (${b.bpm} BPM)`,
-      body: (b, url) => `Hallo Vaynex\n\nIch interessiere mich für die Exklusivlizenz für "${b.name}" (${b.bpm} BPM). Was kostet der Beat?\n${url}\n\nArtist-Name:\nInstagram oder Spotify:\nWofür (Single, EP, Video …):\n\nDanke!`,
       askSubject: b => `Reservierter Beat: ${b.name}`,
-      askBody: (b, url) => `Hallo Vaynex\n\n"${b.name}" ist als reserviert markiert. Falls er wieder frei wird, sag mir bitte Bescheid.\n${url}\n\nArtist-Name:\nInstagram oder Spotify:\n\nDanke!`
     },
     it: {
       all: 'Tutti', new: 'Nuovo', buy: 'Chiedi il prezzo', buyShort: 'Prezzo', ask: 'Chiedi', reserved: 'Riservato', sold: 'Venduto',
@@ -40,9 +39,7 @@
       loadError: 'Al momento i beat non si caricano. Ricarica la pagina o scrivimi a',
       audioError: 'Questa anteprima non si carica. Riprova tra un attimo.',
       subject: b => `Richiesta prezzo: ${b.name} (${b.bpm} BPM)`,
-      body: (b, url) => `Ciao Vaynex,\n\nmi interessa la licenza esclusiva per "${b.name}" (${b.bpm} BPM). Quanto costa?\n${url}\n\nNome d’arte:\nInstagram o Spotify:\nPer cosa (singolo, EP, video ...):\n\nGrazie!`,
       askSubject: b => `Beat riservato: ${b.name}`,
-      askBody: (b, url) => `Ciao Vaynex,\n\n"${b.name}" risulta riservato. Se torna disponibile, fammelo sapere.\n${url}\n\nNome d’arte:\nInstagram o Spotify:\n\nGrazie!`
     },
     fr: {
       all: 'Tous', new: 'Nouveau', buy: 'Demander le prix', buyShort: 'Prix', ask: 'Demander', reserved: 'Réservé', sold: 'Vendu',
@@ -55,9 +52,7 @@
       loadError: 'Les beats ne se chargent pas pour le moment. Recharge la page ou écris-moi à',
       audioError: 'Cet extrait ne se charge pas. Réessaie dans un instant.',
       subject: b => `Demande de prix : ${b.name} (${b.bpm} BPM)`,
-      body: (b, url) => `Salut Vaynex,\n\nLa licence exclusive pour "${b.name}" (${b.bpm} BPM) m’intéresse. Quel est le prix ?\n${url}\n\nNom d’artiste :\nInstagram ou Spotify :\nPour quoi (single, EP, clip ...) :\n\nMerci !`,
       askSubject: b => `Beat réservé : ${b.name}`,
-      askBody: (b, url) => `Salut Vaynex,\n\n"${b.name}" est marqué comme réservé. S’il redevient disponible, préviens-moi.\n${url}\n\nNom d’artiste :\nInstagram ou Spotify :\n\nMerci !`
     },
     en: {
       all: 'All', new: 'New', buy: 'Ask for price', buyShort: 'Price', ask: 'Ask', reserved: 'Reserved', sold: 'Sold',
@@ -70,9 +65,7 @@
       loadError: "The beats didn't load right now. Reload the page or write to",
       audioError: "This preview didn't load. Try again in a moment.",
       subject: b => `Price request: ${b.name} (${b.bpm} BPM)`,
-      body: (b, url) => `Hi Vaynex,\n\nI'm interested in the exclusive license for "${b.name}" (${b.bpm} BPM). What's the price?\n${url}\n\nArtist name:\nInstagram or Spotify:\nWhat it's for (single, EP, video ...):\n\nThanks!`,
       askSubject: b => `Reserved beat: ${b.name}`,
-      askBody: (b, url) => `Hi Vaynex,\n\n"${b.name}" is marked reserved. If it becomes available again, please let me know.\n${url}\n\nArtist name:\nInstagram or Spotify:\n\nThanks!`
     }
   };
   const lang = (document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
@@ -126,12 +119,6 @@
   const storePath = location.pathname.replace(/beats\/.*$/, 'beats/');
   const pathBeat = decodeURIComponent((location.pathname.match(/beats\/([a-z0-9-]+)\/?$/) || [])[1] || '');
   const shareURL = b => location.origin + storePath + b.id + '/';
-
-  function mailto(subject, body) {
-    return `mailto:${MAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body.replace(/\n/g, '\r\n'))}`;
-  }
-  const buyHref = b => mailto(T.subject(b), T.body(b, shareURL(b)));
-  const askHref = b => mailto(T.askSubject(b), T.askBody(b, shareURL(b)));
 
   // ---------- Waveform ----------
   function bars(b, n = 64) {
@@ -209,7 +196,7 @@
     if (!sold) {
       acts += `<button class="icon-btn" type="button" data-act="link" aria-label="${esc(T.copyLink(b.name))}" title="${esc(T.copyLink(b.name))}">${LINK}</button>`;
       acts += reserved
-        ? `<a class="ask" href="${esc(askHref(b))}">${esc(T.ask)}</a>`
+        ? `<button class="ask" type="button" data-act="ask">${esc(T.ask)}</button>`
         : `<button class="buy" type="button" data-act="buy"><span class="long">${esc(T.buy)}</span><span class="short">${esc(T.buyShort)}</span></button>`;
     }
     return `
@@ -338,23 +325,60 @@
     else load(i, ratio * d);
   }
 
-  // ---------- Buy sheet ----------
-  const sheet = $('sheet');
+  // ---------- Request sheet ----------
+  // Netlify form "price-request" (static in every beats/index.html, so Netlify finds it at deploy).
+  // mode "price" for available beats, "reserved" for "tell me if it's free again". Name and email stay filled for a second request.
+  const sheet = $('sheet'), form = $('sForm'), sGo = $('sGo');
+  const goLabel = sGo.textContent;
   let lastFocus = null;
-  function openSheet(b) {
+  function openSheet(b, mode) {
     $('sCover').innerHTML = coverHTML(b);
     $('sTitle').textContent = b.name;
-    $('sMeta').textContent = meta(b);
-    $('sGo').href = buyHref(b);
+    $('sMeta').textContent = [meta(b), mode === 'reserved' ? T.reserved : ''].filter(Boolean).join(' · ');
+    const f = form.elements;
+    f.request.value = mode;
+    f.subject.value = mode === 'reserved' ? T.askSubject(b) : T.subject(b);
+    f.beat.value = b.name;
+    f.bpm.value = b.bpm || '';
+    f.link.value = shareURL(b);
+    f.language.value = lang.toUpperCase();
+    sheet.querySelectorAll('[data-mode]').forEach(el => { el.hidden = el.dataset.mode !== mode; });
+    form.hidden = false;
+    $('sDone').hidden = true;
+    $('sError').hidden = true;
+    sGo.disabled = false;
+    sGo.textContent = goLabel;
     lastFocus = document.activeElement;
     sheet.hidden = false;
-    $('sGo').focus();
+    // Phones: no keyboard popping up over the sheet before the visitor has read it
+    if (matchMedia('(pointer: fine)').matches) $('sArtist').focus(); else $('sClose').focus();
   }
   function closeSheet() { sheet.hidden = true; if (lastFocus) lastFocus.focus(); }
   $('sClose').addEventListener('click', closeSheet);
+  $('sOk').addEventListener('click', closeSheet);
   sheet.addEventListener('click', e => { if (e.target === sheet) closeSheet(); });
   $('sCopy').addEventListener('click', () => copy(MAIL, T.addressCopied));
-  $('sGo').addEventListener('click', () => setTimeout(closeSheet, 400));
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    sGo.disabled = true;
+    sGo.textContent = sGo.dataset.sending;
+    $('sError').hidden = true;
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    }).then(r => {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      $('sMail').textContent = form.elements.email.value.trim();
+      form.hidden = true;
+      $('sDone').hidden = false;
+      $('sOk').focus();
+    }).catch(() => {
+      sGo.disabled = false;
+      sGo.textContent = goLabel;
+      $('sError').hidden = false;
+    });
+  });
 
   // ---------- Toast, copy ----------
   const toast = $('toast');
@@ -380,7 +404,8 @@
     const act = el.dataset.act;
     if (act === 'play') toggle(b.i);
     if (act === 'seek') seekFromClick(e, el, b.i);
-    if (act === 'buy') openSheet(b);
+    if (act === 'buy') openSheet(b, 'price');
+    if (act === 'ask') openSheet(b, 'reserved');
     if (act === 'link') copy(shareURL(b), `${T.copied}: ${shareURL(b).replace(/^https?:\/\/(www\.)?/, '')}`);
   });
   $('q').addEventListener('input', e => { state.q = e.target.value; renderRows(); });
@@ -390,7 +415,7 @@
   $('prev').addEventListener('click', () => { if (position() > 3) audio.currentTime = 0; else step(-1); });
   $('next').addEventListener('click', () => step(1));
   pWave.addEventListener('click', e => { if (state.cur >= 0) seekFromClick(e, pWave, state.cur); });
-  $('pBuy').addEventListener('click', () => { const b = current(); if (b) openSheet(b); });
+  $('pBuy').addEventListener('click', () => { const b = current(); if (b) openSheet(b, 'price'); });
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && !sheet.hidden) closeSheet();
     if (e.code === 'Space' && sheet.hidden && !e.target.closest('input, select, textarea, button, a')) { e.preventDefault(); toggle(); }

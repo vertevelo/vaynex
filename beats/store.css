@@ -295,6 +295,22 @@ footer.site { border-top: 1px solid var(--line); padding: 34px 0; }
 .sheet-foot { display: flex; gap: 10px; justify-content: flex-end; padding: 0 18px 18px; flex-wrap: wrap; }
 .btn-ghost { border: 1px solid var(--line-strong); background: transparent; border-radius: 8px; height: 40px; padding: 0 16px; cursor: pointer; font-weight: 500; }
 .sheet-foot .buy { height: 40px; }
+.sheet-foot .buy:disabled { opacity: .6; cursor: progress; }
+.hp { display: none; }
+.fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+@media (max-width: 480px) { .fields { grid-template-columns: minmax(0, 1fr); } }
+.field { display: grid; gap: 5px; font-size: 13px; color: var(--muted); }
+.field em { color: var(--accent-hi); font-style: normal; }
+.field input {
+  width: 100%; min-width: 0; background: var(--bg); border: 1px solid var(--line-strong); color: var(--ink);
+  border-radius: 8px; padding: 9px 11px; font: inherit; font-size: 16px; /* 16px: no zoom on iPhone */
+}
+.field input::placeholder { color: var(--muted); opacity: .6; }
+.field input:focus { border-color: var(--muted); outline: none; }
+.field input:focus-visible { outline: 2px solid var(--accent-hi); outline-offset: 1px; }
+.sheet-body.done h3 { font-size: 20px; }
+.sheet-body.done p { color: var(--muted); font-size: 15px; }
+.sheet-body.done b { color: var(--ink); overflow-wrap: anywhere; }
 
 /* Cookie-Symbol (CookieYes) über den Player heben, sonst liegt es auf dem Cover */
 body.has-player .cky-btn-revisit-wrapper { bottom: calc(var(--player-h) + env(safe-area-inset-bottom, 0px) + 12px) !important; }

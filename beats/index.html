@@ -56,7 +56,7 @@
           <div class="eyebrow">Beat Store · Boom-Bap</div>
           <h1>Every beat is sold once.</h1>
         </div>
-        <p class="lead">Hand-made boom-bap from Switzerland. Pick a beat, send me a mail, I reply with the price and the license. After that it's yours alone and it's marked sold here.</p>
+        <p class="lead">Hand-made boom-bap from Switzerland. Pick a beat, send me a short request, I reply with the price and the license. After that it's yours alone and it's marked sold here.</p>
         <div class="tally" id="tally" aria-live="polite"></div>
         <dl class="facts">
           <div><dt>On request</dt><dd>price per beat, just ask</dd></div>
@@ -104,7 +104,7 @@
         </div>
         <ol class="steps">
           <li><h3>Listen and pick</h3><p>Previews carry a voice tag. The files you buy don't.</p></li>
-          <li><h3>Send the mail</h3><p>Ask for price opens an email with the beat already in it. Add your artist name and what it's for.</p></li>
+          <li><h3>Send the request</h3><p>Ask for price opens a short form with the beat already in it. Add your artist name and your email, that's it.</p></li>
           <li><h3>Sign the license</h3><p>I reply personally with the price, the exclusive license agreement and the payment details.</p></li>
           <li><h3>Get your files</h3><p>WAV and MP3 without tag. The beat is marked sold for good.</p></li>
         </ol>
@@ -154,20 +154,46 @@
         <span class="cover" id="sCover"></span>
         <div><h2 id="sTitle"></h2><p id="sMeta"></p></div>
       </div>
-      <div class="sheet-body">
-        <ul>
-          <li>Exclusive license, the beat is sold only once</li>
-          <li>100% master rights, WAV 24-bit and MP3 without tag</li>
-          <li>Your mail opens with the beat filled in, I reply personally with the price and the license</li>
-        </ul>
-        <div class="fallback">
-          <span>No mail app? Write to <b>mail@vaynex.ch</b> with the beat name.</span>
-          <button class="linkish" type="button" id="sCopy">Copy address</button>
+      <form id="sForm" name="price-request" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="price-request" />
+        <input type="hidden" name="subject" data-remove-prefix value="Price request via vaynex.ch" />
+        <input type="hidden" name="request" value="price" />
+        <input type="hidden" name="beat" value="" />
+        <input type="hidden" name="bpm" value="" />
+        <input type="hidden" name="link" value="" />
+        <input type="hidden" name="language" value="EN" />
+        <p class="hp"><label>Don't fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+        <div class="sheet-body">
+          <ul data-mode="price">
+            <li>Exclusive license, the beat is sold only once</li>
+            <li>100% master rights, WAV 24-bit and MP3 without tag</li>
+            <li>I reply personally by email with the price and the license</li>
+          </ul>
+          <ul data-mode="reserved" hidden>
+            <li>This beat is reserved right now. Leave your details and I'll let you know if it's free again.</li>
+          </ul>
+          <div class="fields">
+            <label class="field"><span>Artist name <em>*</em></span><input id="sArtist" name="artist_name" type="text" autocomplete="nickname" required /></label>
+            <label class="field"><span>Email <em>*</em></span><input name="email" type="email" autocomplete="email" required /></label>
+            <label class="field"><span>Instagram or Spotify</span><input name="instagram_or_spotify" type="text" autocapitalize="off" placeholder="@yourname or a link" /></label>
+            <label class="field" data-mode="price"><span>What it's for</span><input name="purpose" type="text" placeholder="Single, EP, video …" /></label>
+          </div>
+          <div class="fallback" id="sError" role="alert" hidden>
+            <span>That didn't go through. Try again, or write to <b>mail@vaynex.ch</b> with the beat name.</span>
+            <button class="linkish" type="button" id="sCopy">Copy address</button>
+          </div>
         </div>
-      </div>
-      <div class="sheet-foot">
-        <button class="btn-ghost" type="button" id="sClose">Close</button>
-        <a class="buy" id="sGo" href="mailto:mail@vaynex.ch">Write the email</a>
+        <div class="sheet-foot">
+          <button class="btn-ghost" type="button" id="sClose">Close</button>
+          <button class="buy" type="submit" id="sGo" data-sending="Sending …">Send request</button>
+        </div>
+      </form>
+      <div id="sDone" hidden>
+        <div class="sheet-body done">
+          <h3>Request sent.</h3>
+          <p>I reply personally to <b id="sMail"></b>. Check your spam folder too.</p>
+        </div>
+        <div class="sheet-foot"><button class="buy" type="button" id="sOk">Close</button></div>
       </div>
     </div>
   </div>

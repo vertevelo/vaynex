@@ -56,7 +56,7 @@
           <div class="eyebrow">Beat Store · Boom-Bap</div>
           <h1>Chaque beat n’est vendu qu’une fois.</h1>
         </div>
-        <p class="lead">Du boom-bap fait main en Suisse. Choisis un beat, envoie-moi un mail, je te réponds avec le prix et la licence. Ensuite, il est à toi seul et il apparaît comme vendu ici.</p>
+        <p class="lead">Du boom-bap fait main en Suisse. Choisis un beat, envoie-moi une courte demande, je te réponds avec le prix et la licence. Ensuite, il est à toi seul et il apparaît comme vendu ici.</p>
         <div class="tally" id="tally" aria-live="polite"></div>
         <dl class="facts">
           <div><dt>Sur demande</dt><dd>prix par beat, demande-moi</dd></div>
@@ -104,7 +104,7 @@
         </div>
         <ol class="steps">
           <li><h3>Écoute et choisis</h3><p>Les extraits ont un voice tag. Les fichiers que tu achètes, non.</p></li>
-          <li><h3>Envoie le mail</h3><p>Demander le prix ouvre un e-mail avec le beat déjà indiqué. Ajoute ton nom d’artiste et l’usage prévu.</p></li>
+          <li><h3>Envoie la demande</h3><p>Demander le prix ouvre un court formulaire avec le beat déjà indiqué. Ajoute ton nom d’artiste et ton e-mail, c’est tout.</p></li>
           <li><h3>Signe la licence</h3><p>Je te réponds personnellement avec le prix, le contrat de licence exclusive et les infos de paiement.</p></li>
           <li><h3>Reçois tes fichiers</h3><p>WAV et MP3 sans tag. Le beat est marqué vendu pour de bon.</p></li>
         </ol>
@@ -154,20 +154,46 @@
         <span class="cover" id="sCover"></span>
         <div><h2 id="sTitle"></h2><p id="sMeta"></p></div>
       </div>
-      <div class="sheet-body">
-        <ul>
-          <li>Licence exclusive, le beat n’est vendu qu’une fois</li>
-          <li>100% des droits master, WAV 24 bits et MP3 sans tag</li>
-          <li>Ton mail s’ouvre avec le beat déjà indiqué, je te réponds personnellement avec le prix et la licence</li>
-        </ul>
-        <div class="fallback">
-          <span>Pas d’app mail ? Écris à <b>mail@vaynex.ch</b> avec le nom du beat.</span>
-          <button class="linkish" type="button" id="sCopy">Copier l’adresse</button>
+      <form id="sForm" name="price-request" method="POST" action="/thanks.html" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="price-request" />
+        <input type="hidden" name="subject" data-remove-prefix value="Demande de prix via vaynex.ch" />
+        <input type="hidden" name="request" value="price" />
+        <input type="hidden" name="beat" value="" />
+        <input type="hidden" name="bpm" value="" />
+        <input type="hidden" name="link" value="" />
+        <input type="hidden" name="language" value="FR" />
+        <p class="hp"><label>Ne remplis pas ce champ : <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+        <div class="sheet-body">
+          <ul data-mode="price">
+            <li>Licence exclusive, le beat n’est vendu qu’une fois</li>
+            <li>100% des droits master, WAV 24 bits et MP3 sans tag</li>
+            <li>Je te réponds personnellement par e-mail avec le prix et la licence</li>
+          </ul>
+          <ul data-mode="reserved" hidden>
+            <li>Ce beat est réservé pour le moment. Laisse tes coordonnées et je te préviens s’il redevient disponible.</li>
+          </ul>
+          <div class="fields">
+            <label class="field"><span>Nom d’artiste <em>*</em></span><input id="sArtist" name="artist_name" type="text" autocomplete="nickname" required /></label>
+            <label class="field"><span>E-mail <em>*</em></span><input name="email" type="email" autocomplete="email" required /></label>
+            <label class="field"><span>Instagram ou Spotify</span><input name="instagram_or_spotify" type="text" autocapitalize="off" placeholder="@tonnom ou un lien" /></label>
+            <label class="field" data-mode="price"><span>Pour quoi</span><input name="purpose" type="text" placeholder="Single, EP, clip …" /></label>
+          </div>
+          <div class="fallback" id="sError" role="alert" hidden>
+            <span>Ça n’a pas marché. Réessaie ou écris à <b>mail@vaynex.ch</b> avec le nom du beat.</span>
+            <button class="linkish" type="button" id="sCopy">Copier l’adresse</button>
+          </div>
         </div>
-      </div>
-      <div class="sheet-foot">
-        <button class="btn-ghost" type="button" id="sClose">Fermer</button>
-        <a class="buy" id="sGo" href="mailto:mail@vaynex.ch">Écrire l’e-mail</a>
+        <div class="sheet-foot">
+          <button class="btn-ghost" type="button" id="sClose">Fermer</button>
+          <button class="buy" type="submit" id="sGo" data-sending="Envoi …">Envoyer la demande</button>
+        </div>
+      </form>
+      <div id="sDone" hidden>
+        <div class="sheet-body done">
+          <h3>Demande envoyée.</h3>
+          <p>Je te réponds personnellement à <b id="sMail"></b>. Regarde aussi dans tes spams.</p>
+        </div>
+        <div class="sheet-foot"><button class="buy" type="button" id="sOk">Fermer</button></div>
       </div>
     </div>
   </div>
